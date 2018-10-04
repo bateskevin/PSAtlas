@@ -5,19 +5,18 @@ Enum Level {
     Expert
 }
 
-Class Lesson {
+Class Lession {
     [String]$Name
     [Level]$Level
     [Step[]]$Step
 
-    Lesson($LessonCFG){
-        $JSON = (Get-Content $LessonCFG) -join "`n" | ConvertFrom-Json
+    Lession($LessionCFG){
+        $JSON = (Get-Content $LessionCFG) -join "`n" | ConvertFrom-Json
 
         $This.Name = $JSON.Name
         $This.Level = $JSON.Level
-        
 
-        $StepPath = (split-path $LessonCFG)
+        $StepPath = (split-path $LessionCFG)
         $Steps = (Get-ChildItem $StepPath -Directory).FullName
 
         foreach($Step in $Steps){
