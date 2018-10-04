@@ -26,7 +26,7 @@ Function Start-PWSHSchoolLession {
 
         # Generate and set the ValidateSet 
         #$arrSet = Get-ChildItem -Path "$Env:PsModulePath\PWSHSchool\Lessons" -Directory | Select-Object -ExpandProperty Name
-        $arrSet = Get-ChildItem -Path "C:\git\PWSHSchool\Lessons" -Directory | Select-Object -ExpandProperty Name
+        $arrSet = Get-ChildItem -Path "C:\git\PWSHSchool\Lessions" -Directory | Select-Object -ExpandProperty Name
         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
 
         # Add the ValidateSet to the attributes collection
@@ -44,12 +44,22 @@ Function Start-PWSHSchoolLession {
     }
 
     process {
-        $LessionPath = Join-Path -Path "C:\git\PWSHSchool\Lessons" -ChildPath $Lession
+        $LessionPath = Join-Path -Path "C:\git\PWSHSchool\Lessions" -ChildPath $Lession
         $LessionJSON = Join-Path -Path $LessionPath -ChildPath "Lession.json"
+        $LessionFilePath = Join-Path -Path $LessionPath -ChildPath "current.ps1"
 
         $LessionObj = [Lession]::new($LessionJSON)
 
-        return $LessionObj
+        $null = New-Item -ItemType File -Path $LessionFilePath
+
+        Foreach($Step in $Lession.Step){
+            "<#" | out-file -FilePath $LessionFilePath -Append
+            $Step.Title | out-file -FilePath $LessionFilePath -Append
+            $Step.Description | out-file -FilePath $LessionFilePath -Append
+            "#>" | out-file -FilePath $LessionFilePath -Append
+        }
+
+
     }
 
 }
