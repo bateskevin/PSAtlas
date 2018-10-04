@@ -46,19 +46,20 @@ Function Start-PWSHSchoolLession {
     process {
         $LessionPath = Join-Path -Path "C:\git\PWSHSchool\Lessions" -ChildPath $Lession
         $LessionJSON = Join-Path -Path $LessionPath -ChildPath "Lession.json"
-        $LessionFilePath = Join-Path -Path $LessionPath -ChildPath "current.ps1"
+        $LessionFilePath = Join-Path -Path $LessionPath -ChildPath "$Lession.ps1"
 
         $LessionObj = [Lession]::new($LessionJSON)
 
         $null = New-Item -ItemType File -Path $LessionFilePath
 
-        Foreach($Step in $Lession.Step){
+        Foreach($Step in $LessionObj.Step){
             "<#" | out-file -FilePath $LessionFilePath -Append
             $Step.Title | out-file -FilePath $LessionFilePath -Append
             $Step.Description | out-file -FilePath $LessionFilePath -Append
             "#>" | out-file -FilePath $LessionFilePath -Append
         }
 
+        ise -file $LessionFilePath
 
     }
 
