@@ -22,6 +22,16 @@ Import-Module PWSHSchool
 
 Check out the [documentation for adding lessons](docs/AddLessons.md)
 
+## Wanna contribute? 
+
+Check out the Todo List and the [Contribution Guide](docs/CONTRIBUTING.MD) if you are interessted in Contributing.
+
+### Todo List
+
+- [ ] Add support for Artifacts
+- [ ] Upload to the gallery
+- [ ] Maybe some style ideas
+
 ## Documentation on the Project
 
 Check out the [documentation on the Project](docs/Project.md)
