@@ -177,7 +177,7 @@ $($Step.Description)
             }
         }
 
-    Clear-PWSHSchoolLesson -Lesson Variable_Datatypes
+    #Clear-PWSHSchoolLesson -Lesson Variable_Datatypes
 
     Clear-Host
     Write-Host @"
