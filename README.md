@@ -24,7 +24,10 @@ Check out the [documentation for adding lessons](docs/AddLessons.md)
 
 ## Wanna contribute? 
 
-Check out the Todo List and the [Contribution Guide](docs/CONTRIBUTING.md) if you are interessted in Contributing.
+Wanna contribute? please take a look at these files before you start:
+
+* [Code of Conduct](Docs/CODE_OF_CONDUCT.md)
+* [Contribution Guide](Docs/CONTRIBUTING.md)
 
 ### Todo List
 
