@@ -26,8 +26,8 @@ Check out the [documentation for adding lessons](docs/AddLessons.md)
 
 Wanna contribute? please take a look at these files before you start:
 
-* [Code of Conduct](Docs/CODE_OF_CONDUCT.md)
-* [Contribution Guide](Docs/CONTRIBUTING.md)
+* [Code of Conduct](docs/CODE_OF_CONDUCT.md)
+* [Contribution Guide](docs/CONTRIBUTING.md)
 
 ### Todo List
 
