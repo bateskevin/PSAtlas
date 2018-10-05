@@ -1,5 +1,6 @@
+$File = (Get-Childitem "$PSScriptRoot\..\" -File) | ?{$_.name -ne "Template.ps1" -and $_.name -ne "Step.json"}  | select fullname
 
-. "C:\Users\taabake4\git\PWSHSchool\Lessons\Variable_Datatypes\Step2\Create a variable with a specific Datatype.ps1"
+. $File.Fullname
 
 Import-Module Pester
 

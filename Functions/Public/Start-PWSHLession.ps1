@@ -26,7 +26,7 @@ Function Start-PWSHSchoolLesson {
 
         # Generate and set the ValidateSet 
         #$arrSet = Get-ChildItem -Path "$Env:PsModulePath\PWSHSchool\Lessons" -Directory | Select-Object -ExpandProperty Name
-        $arrSet = Get-ChildItem -Path "C:\Users\taabake4\git\PWSHSchool\Lessons" -Directory | Select-Object -ExpandProperty Name
+        $arrSet = Get-ChildItem -Path (Join-Path -Path (Split-path (Get-Module -name PWSHSchool).Path) -ChildPath "Lessons" ) -Directory | Select-Object -ExpandProperty Name
         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
 
         # Add the ValidateSet to the attributes collection
@@ -44,8 +44,11 @@ Function Start-PWSHSchoolLesson {
     }
 
     process {
+
+        $ModulePath = Split-path (Get-Module -name PWSHSchool).Path
+        $LessonFolderPath = Join-Path -Path $ModulePath -ChildPath "Lessons"
         Clear-Host
-        $LessonPath = Join-Path -Path "C:\Users\taabake4\git\PWSHSchool\Lessons" -ChildPath $Lesson
+        $LessonPath = Join-Path -Path $LessonFolderPath -ChildPath $Lesson
         $LessonJSON = Join-Path -Path $LessonPath -ChildPath "Lesson.json"
         #$LessonFilePath = Join-Path -Path $LessonPath -ChildPath "$Lesson.ps1"
 
@@ -58,7 +61,6 @@ Function Start-PWSHSchoolLesson {
         $count++
             $LessonFinished = $false
             $next = ""
-            $already = ""
 
             $StepPath = Split-Path $Step.Path
             $LessonFilePath = Join-Path -Path $StepPath -ChildPath "$($Step.Title).ps1"
@@ -81,6 +83,7 @@ Function Start-PWSHSchoolLesson {
                         write-warning "Please enter 'Y' for yes or 'N' for no"
                     }
                 }
+                $already = ""
             }else{
                 
                 $null = New-Item -ItemType File -Path $LessonFilePath
@@ -91,11 +94,11 @@ Function Start-PWSHSchoolLesson {
             }
             ise -file $LessonFilePath
             $LessonFinished = $false 
-            while($LessonFinished -eq $false){
+            while(!($LessonFinished )){
             
             if($next -eq "Test"){
                     $TestResult = Invoke-Pester $Step.Test -PassThru
-                    $next = ""
+                    #$next = ""
 
                     if($TestResult.TestResult.Passed){
                         Clear-Host
@@ -161,16 +164,21 @@ $($Step.Title)
 $($Step.Description)
 
 "@ -ForegroundColor Green -BackgroundColor Black
-            }
-                $next = Read-Host "[$($LessonObj.Name)][$($Step.Title)]"                
+            }                
 
                 if($next -eq "Skip"){
                     $LessonFinished = $true
                 }
 
+            if(!($LessonFinished)){
+                $next = Read-Host "[$($LessonObj.Name)][$($Step.Title)]"
+            }
 
             }
         }
+
+    Clear-PWSHSchoolLesson -Lesson Variable_Datatypes
+
     Clear-Host
     Write-Host @"
 
