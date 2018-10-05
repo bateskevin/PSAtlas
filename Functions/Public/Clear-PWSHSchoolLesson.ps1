@@ -48,11 +48,11 @@
         $LessonFolderPath = Join-Path -Path $ModulePath -ChildPath "Lessons"
         $LessonPath = Join-Path -Path $LessonFolderPath -ChildPath $Lesson
 
-        $StepPaths = Get-ChildItem $LessonPath
+        $StepPaths = (Get-ChildItem $LessonPath -Recurse -File | ?{$_.name -ne "Template.ps1" -and $_.name -ne "Step.json" -and $_.name -ne "Lesson.json" -and $_.name -notlike "*.Tests.ps1"}).FullName
 
-        foreach($step in $StepPaths.FullName){
-            $File = (Get-Childitem $step -File) | ?{$_.name -ne "Template.ps1" -and $_.name -ne "Step.json" -and $_.name -ne "Lesson.json"}  | select fullname
-            Remove-Item $File.Fullname
+        foreach($step in $StepPaths){
+            $File = (Get-item $step) 
+            Remove-Item $File
         }
         
         
