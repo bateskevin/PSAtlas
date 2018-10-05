@@ -14,6 +14,8 @@ Go ahead and think about how you could divide that topic up into different steps
 
 I also highly recommend you check out the [documentation on using the module](Students.md). Like this you will see what people are gonna face with your lessons. 
 
+Also also, Check out my (very basic) [lesson on Powershell datatypes](https://github.com/bateskevin/PWSHSchool/tree/master/Lessons/Variable_Datatypes). This could serve you as a template for your first lesson.
+
 ## Speaking of steps
 
 Speaking of steps, cause that's exactly how you gonna do it. There is a basic folder structure to follow 
