@@ -1,0 +1,5 @@
+{
+    "Title" : "Create a variable with a specific Datatype",
+    "Description" : "Ok, now try to create a variable with the type [bool].",
+    "Hint" : "Try to set the type before the variable name. Don't forget to set a value (true or false)" 
+}
