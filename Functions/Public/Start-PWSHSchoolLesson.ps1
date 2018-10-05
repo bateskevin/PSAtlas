@@ -54,7 +54,48 @@ Function Start-PWSHSchoolLesson {
 
         $LessonObj = [Lesson]::new($LessonJSON)
 
+        if($LessonObj.Artifacts){
+            foreach($Artifact in $LessonObj.Artifacts){
+                try{
+                    Write-Host @"
+
+ ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
+|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
+|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
+|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
+|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
+|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
+
+The Lesson you're about to do uses local prerequisites. We are about to import them.
+
+
+"@ -ForegroundColor Green -BackgroundColor Black
+                    $ArtifactPath = join-path -Path $LessonPath -ChildPath "Artifacts"
+                    foreach($Folder in $ArtifactPath){
+                        $ModuleFile = Join-Path $ArtifactPath -ChildPath "$($Artifact)\$($Artifact).psd1"
+                        Import-Module $ModuleFile -Force -Verbose
+                    } 
+                }catch{
+                    Write-Host @"
+
+ ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
+|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
+|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
+|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
+|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
+|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
+
+The local Prerequisites could not be installed.
+
+
+"@ -ForegroundColor Green -BackgroundColor Black
+                break
+                }
+            }
+        }
+        
         if($LessonObj.Prerequisites){
+            Clear-Host
             foreach($Prereq in $LessonObj.Prerequisites){
                 try{
                     Write-Host @"
