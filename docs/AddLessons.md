@@ -37,14 +37,15 @@ You will have to set the following values:
 
 1. **Name** --> This will be the name of your lesson (so choose it wisely ;))
 
-2 **Level** --> This will indicate how difficult your lesson is gonna be. 
-
-3 you can choose one of the following values for the level of your lesson:
+2. **Level** --> This will indicate how difficult your lesson is gonna be. 
+ you can choose one of the following values for the level of your lesson:
   * Beginner
   * Intermediate
   * Advanced
   * Expert
-   
+ 
+ 3. **Prerequisites** --> If your lessons requires modules you should put its name here. PWSHSchool is then going to download it before the lesson starts.
+ 
  ## Step Folder 
  
  step folders are located in the root folder. The naming convention should be alphabetically, 
