@@ -99,8 +99,24 @@ If your code passes the tests you will automatically move on to the next task.
 ## Skip a task
 
 You can also skip a task if you are not interessted or can't handle it at that time (or god forbid even a bug appears)
+Your progress will be saved (by you in the ISE) and the next time you get to that task you will be asked if you want to continue.
 
 To skip the task, simply type "skip" in the console and hit enter.
+
+## Exit 
+
+If you want to exit, simply hit ctrl+c and you'll be in your shell just as before you started.
+
+As long as you save your code in the ISE, you will be able to pick up right where you left.
+
+## Clear the lesson
+
+You feel like you need a new start to a specific lesson? Exit the lesson and use the following 
+code to clear it up and you'll be able to have a new start:
+
+```
+Clear-PWSHSchoolLesson -Lesson Variable_Datatypes
+```
 
 ## That's it
 
