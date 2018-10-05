@@ -8,8 +8,10 @@ function Get-PWSHSchoolLesson {
     if($Name){
 
         foreach($Lesson in $Name){
-            $LessonPath = Get-ChildItem -Path (Join-Path -Path (Split-path (Get-Module -name PWSHSchool).Path) -ChildPath "Lessons\$Lesson" ) -Directory | Select-Object -ExpandProperty FullName
-            $JSONPath = Join-Path -Path $LessonPath.FullName -ChildPath "Lesson.json"
+            $LessonHybrid = Join-Path -Path "Lessons" -ChildPath $Lesson
+            $ModulePath = Split-path (Get-Module -name PWSHSchool).Path
+            $LessonPath = (Join-Path -Path $ModulePath -ChildPath $LessonHybrid)
+            $JSONPath = Join-Path -Path $LessonPath -ChildPath "Lesson.json"
             $Arr += $JSONPath
         } 
     }else{
