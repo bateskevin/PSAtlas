@@ -29,7 +29,7 @@ Your Rootfolder will have the name of your lesson. **Make sure it does not conta
 
 In your root folder you will need a "Lesson.json" file. 
 
-![LessonJSON](.-/Img/LessonJSON.PNG)
+![LessonJSON](../Img/LessonJSON.PNG)
 
 You will have to set the following values:
 
@@ -54,7 +54,7 @@ You will have to set the following values:
  
  The Step.json file should contain the following information:
  
- ![StepJSON](.-/Img/StepJSON.PNG)
+ ![StepJSON](../Img/StepJSON.PNG)
  
 1. **Title** --> This will be the Title of this step.
 
