@@ -11,7 +11,8 @@ confortable sharing your knowledge contribute lessons yourself.
 
 Check out the [documentation for the students](docs/Students.md)
 
-## Install the Module 
+## Install the Module (Not yet available on the Gallery. Gonna upload it soon)
+
 ```
 Find-Module -Name PWSHSchool | Install-Module
 Import-Module PWSHSchool
