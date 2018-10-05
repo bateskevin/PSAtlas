@@ -44,7 +44,9 @@ You will have to set the following values:
   * Advanced
   * Expert
  
- 3. **Prerequisites** --> If your lessons requires modules you should put its name here. PWSHSchool is then going to download it before the lesson starts.
+ 3. **Prerequisites** --> If your lessons requires modules you should put its name here. PWSHSchool is then going to download it before the lesson starts. **This is for Modules on the Gallery**
+ 
+ 4. **Artifacts** --> If you want to load Modules that are not in the gallery you can add a Folder (the folder should have the same name as the module file it contains) to the Artifacts folder. The Artifacts Folder should be stored in the root folder. 
  
  ## Step Folder 
  
