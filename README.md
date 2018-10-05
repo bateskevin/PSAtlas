@@ -24,7 +24,7 @@ Check out the [documentation for adding lessons](docs/AddLessons.md)
 
 ## Wanna contribute? 
 
-Check out the Todo List and the [Contribution Guide](docs/CONTRIBUTING.MD) if you are interessted in Contributing.
+Check out the Todo List and the [Contribution Guide](docs/CONTRIBUTING.md) if you are interessted in Contributing.
 
 ### Todo List
 
