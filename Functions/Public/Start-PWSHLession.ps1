@@ -1,4 +1,4 @@
-Function Start-PWSHSchoolLession {
+Function Start-PWSHSchoolLesson {
 
     [CmdletBinding()]
     Param(
@@ -8,7 +8,7 @@ Function Start-PWSHSchoolLession {
     DynamicParam {
 
         # Set the dynamic parameters' name
-        $ParameterName = 'Lession'
+        $ParameterName = 'Lesson'
             
         # Create the dictionary 
         $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
@@ -26,7 +26,7 @@ Function Start-PWSHSchoolLession {
 
         # Generate and set the ValidateSet 
         #$arrSet = Get-ChildItem -Path "$Env:PsModulePath\PWSHSchool\Lessons" -Directory | Select-Object -ExpandProperty Name
-        $arrSet = Get-ChildItem -Path "C:\Users\taabake4\git\PWSHSchool\Lessions" -Directory | Select-Object -ExpandProperty Name
+        $arrSet = Get-ChildItem -Path "C:\Users\taabake4\git\PWSHSchool\Lessons" -Directory | Select-Object -ExpandProperty Name
         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
 
         # Add the ValidateSet to the attributes collection
@@ -40,43 +40,41 @@ Function Start-PWSHSchoolLession {
 
     begin {
         # Bind the parameter to a friendly variable
-        $Lession = $PsBoundParameters[$ParameterName]
+        $Lesson = $PsBoundParameters[$ParameterName]
     }
 
     process {
-        $LessionPath = Join-Path -Path "C:\Users\taabake4\git\PWSHSchool\Lessions" -ChildPath $Lession
-        $LessionJSON = Join-Path -Path $LessionPath -ChildPath "Lession.json"
-        #$LessionFilePath = Join-Path -Path $LessionPath -ChildPath "$Lession.ps1"
+        Clear-Host
+        $LessonPath = Join-Path -Path "C:\Users\taabake4\git\PWSHSchool\Lessons" -ChildPath $Lesson
+        $LessonJSON = Join-Path -Path $LessonPath -ChildPath "Lesson.json"
+        #$LessonFilePath = Join-Path -Path $LessonPath -ChildPath "$Lesson.ps1"
 
-        $LessionObj = [Lession]::new($LessionJSON)
+        $LessonObj = [Lesson]::new($LessonJSON)
 
         $Count = 0
-        $Stepcount = $LessionObj.Step.count
+        $Stepcount = $LessonObj.Step.count
 
-        Foreach($Step in $LessionObj.Step){
+        Foreach($Step in $LessonObj.Step){
         $count++
-            $LessionFinished = $false
+            $LessonFinished = $false
             $next = ""
             $already = ""
 
             $StepPath = Split-Path $Step.Path
-            $LessionFilePath = Join-Path -Path $StepPath -ChildPath "$($Step.Title).ps1"
+            $LessonFilePath = Join-Path -Path $StepPath -ChildPath "$($Step.Title).ps1"
 
-            if(Test-Path $LessionFilePath){
+            if(Test-Path $LessonFilePath){
                 while($already -ne "Y" -and $already -ne "N"){
                     $already = Read-Host "You already started this lesson, do you whish to continue? (Y/N) - Carefull, by selecting no you will loose your progress!"
+                    Clear-Host
                     if($already -eq "Y"){
-                       ise -file $LessionFilePath 
+                       ise -file $LessonFilePath 
                     }elseif($already -eq "N"){
-                        Remove-Item $LessionFilePath
-                        $null = New-Item -ItemType File -Path $LessionFilePath
-                        "<#" | out-file -FilePath $LessionFilePath -Append
-                        $Step.Title | out-file -FilePath $LessionFilePath -Append
-                        $Step.Description | out-file -FilePath $LessionFilePath -Append
-                        "#>" | out-file -FilePath $LessionFilePath -Append
+                        Remove-Item $LessonFilePath
+                        $null = New-Item -ItemType File -Path $LessonFilePath
                         if(Test-Path $Step.Template){
                             $Templatecontent = Get-Content $Step.Template
-                            $Templatecontent | out-file -FilePath $LessionFilePath -Append
+                            $Templatecontent | out-file -FilePath $LessonFilePath -Append
                         }
                     }else{
                         Clear-Host
@@ -85,22 +83,27 @@ Function Start-PWSHSchoolLession {
                 }
             }else{
                 
-                $null = New-Item -ItemType File -Path $LessionFilePath
-                "<#" | out-file -FilePath $LessionFilePath -Append
-                $Step.Title | out-file -FilePath $LessionFilePath -Append
-                $Step.Description | out-file -FilePath $LessionFilePath -Append
-                "#>" | out-file -FilePath $LessionFilePath -Append
+                $null = New-Item -ItemType File -Path $LessonFilePath
                 if(Test-Path $Step.Template){
                     $Templatecontent = Get-Content $Step.Template
-                    $Templatecontent | out-file -FilePath $LessionFilePath -Append
+                    $Templatecontent | out-file -FilePath $LessonFilePath -Append
                 }
             }
-            ise -file $LessionFilePath
-            $LessionFinished = $false 
-            do{        
-                Clear-Host
-                if($next -ne "Test" -and $next -ne "Skip"){
-                    Write-Host @"
+            ise -file $LessonFilePath
+            $LessonFinished = $false 
+            while($LessonFinished -eq $false){
+            
+            if($next -eq "Test"){
+                    $TestResult = Invoke-Pester $Step.Test -PassThru
+                    $next = ""
+
+                    if($TestResult.TestResult.Passed){
+                        Clear-Host
+                        $LessonFinished = $true
+                    }else{
+
+                        Clear-Host
+                        Write-Host @"
 
  ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
 |    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
@@ -119,36 +122,72 @@ Remember that you will have to save your code in ISE to have it avaiable later o
 
 You are currently on Step $Count of $StepCount
 
+Not quite there yet!
+
+$($Step.Title)
+
+$($Step.Description)
+
+Your code failed with the following message:
+
+
 "@ -ForegroundColor Green -BackgroundColor Black
-                $next = Read-Host "[$($LessionObj.Name)][$($Step.Title)]"
-
-                }
-
-                if($next -eq "Test"){
-                    $TestResult = Invoke-Pester $Step.Test -PassThru
-
-                    if($TestResult.TestResult.Passed){
-                        Clear-Host
-                        $LessionFinished = $true
-                    }else{
-                        Clear-Host
-                        Write-Host "Not quite there yet!"
-                        Write-Host ""
-                        Write-Host "Your code failed with the following message:"
-                        Write-Host "$($TestResult.TestResult.FailureMessage)" -foregroundcolor Red -backgroundcolor Black
-                        Write-Host ""
+                    write-host $($TestResult.TestResult.FailureMessage) -ForegroundColor Red -BackgroundColor Black
+                    write-host ""
                     }
-                }
+                }else{
+                   
+            Write-Host @"
 
-                
+ ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
+|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
+|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
+|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
+|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
+|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
+
+Here are the things you can Run:
+
+Test : Test your solution by typing test.
+Skip : Skip this lesson and move on to the next one
+                    
+if you want to quit the Lesson hit ctrl + C. 
+Remember that you will have to save your code in ISE to have it avaiable later on.
+
+You are currently on Step $Count of $StepCount
+
+$($Step.Title)
+
+$($Step.Description)
+
+"@ -ForegroundColor Green -BackgroundColor Black
+            }
+                $next = Read-Host "[$($LessonObj.Name)][$($Step.Title)]"                
 
                 if($next -eq "Skip"){
-                    $LessionFinished = $true
+                    $LessonFinished = $true
                 }
 
-                
 
-            }while($LessionFinished -eq $false)
-        }      
+            }
+        }
+    Clear-Host
+    Write-Host @"
+
+ ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
+|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
+|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
+|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
+|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
+|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
+
+Congratulations! you finished Lesson $($LessonObj.Name)
+                    
+Thank you for using PWSHSchool. If you are interessted why not start the next lesson? ;)
+
+Cheers!
+
+"@ -ForegroundColor Green -BackgroundColor Black
+              
     }
 }

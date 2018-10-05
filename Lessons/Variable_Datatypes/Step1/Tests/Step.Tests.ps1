@@ -1,5 +1,5 @@
 
-. "C:\Users\taabake4\git\PWSHSchool\Lessions\Variable_Datatypes\Step1\Create a Variable.ps1"
+. "C:\Users\taabake4\git\PWSHSchool\Lessons\Variable_Datatypes\Step1\Create a Variable.ps1"
 
 Import-Module Pester
 
