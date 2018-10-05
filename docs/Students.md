@@ -1,3 +1,5 @@
+![PWSHSchool](Img/PWSHSchool.png)
+
 # Take Lessons
 
 Hey, in this document you will learn how to use PWSHSchool as a Student. 
@@ -65,7 +67,7 @@ All lessons available support autocompletion. You can therefore also use that to
 ### Console --> Interface
 Ok you started your Lesson. Now the console you started in will become your Interface. This will look like this:
 
-![Console](Img/Console.png)
+![Console](Img/Console.PNG)
 
 Note that in the console you will at all time see on which step you are, what your current task is and you also
 get displayed what you can enter in the console. 
@@ -75,7 +77,7 @@ Next to the console getting your interface, Powershell ISE will start up and loa
 
 As an example. The first task from the Variable_Types Lesson will look like this in the ISE
 
-![ISETask](Img/ISETask.png)
+![ISETask](Img/ISETask.PNG)
 
 ## Edit and test your code
 
@@ -92,7 +94,7 @@ To run a test, simply type "test" in the console and hit enter.
 
 If your test fails you will get shown the error message in the console:
 
-![ConsoleError](img/ConsoleError.png)
+![ConsoleError](img/ConsoleError.PNG)
 
 If your code passes the tests you will automatically move on to the next task.
 
