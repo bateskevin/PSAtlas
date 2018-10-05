@@ -51,7 +51,7 @@
         $StepPaths = Get-ChildItem $LessonPath
 
         foreach($step in $StepPaths.FullName){
-            $File = (Get-Childitem $step -File) | ?{$_.name -ne "Template.ps1" -and $_.name -ne "Step.json"}  | select fullname
+            $File = (Get-Childitem $step -File) | ?{$_.name -ne "Template.ps1" -and $_.name -ne "Step.json" -and $_.name -ne "Lesson.json"}  | select fullname
             Remove-Item $File.Fullname
         }
         
