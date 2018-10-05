@@ -2,6 +2,8 @@
 
     "Name" : "Variable_Types",
 
-    "Level" : "Beginner"
+    "Level" : "Beginner",
+
+    "Prerequisites" : "PSMD"
 
 }

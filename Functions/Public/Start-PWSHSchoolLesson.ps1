@@ -54,6 +54,43 @@ Function Start-PWSHSchoolLesson {
 
         $LessonObj = [Lesson]::new($LessonJSON)
 
+        if($LessonObj.Prerequisites){
+            foreach($Prereq in $LessonObj.Prerequisites){
+                try{
+                    Write-Host @"
+
+ ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
+|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
+|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
+|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
+|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
+|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
+
+The Lesson you're about to do uses prerequisites. We are about to download them. You can interfeer in the process.
+
+
+"@ -ForegroundColor Green -BackgroundColor Black
+
+                    find-Module $Prereq | Install-Module -Verbose 
+                }catch{
+                    Write-Host @"
+
+ ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
+|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
+|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
+|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
+|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
+|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
+
+The Prerequisites could not be installed.
+
+
+"@ -ForegroundColor Green -BackgroundColor Black
+                break
+                }
+            }
+        }
+
         $Count = 0
         $Stepcount = $LessonObj.Step.count
 

@@ -8,6 +8,7 @@ Enum Level {
 Class Lesson {
     [String]$Name
     [Level]$Level
+    [String[]]$Prerequisites
     [Step[]]$Step
 
     Lesson($LessonCFG){
@@ -15,6 +16,7 @@ Class Lesson {
 
         $This.Name = $JSON.Name
         $This.Level = $JSON.Level
+        $This.Prerequisites = $JSON.Prerequisites
 
         $StepPath = (split-path $LessonCFG)
         $Steps = (Get-ChildItem $StepPath -Directory).FullName
