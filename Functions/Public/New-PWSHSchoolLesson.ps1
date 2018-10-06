@@ -24,11 +24,9 @@ function New-PWSHSchoolLesson {
     $JSON = $LessonObj | ConvertTo-Json
 
     $FolderPath = Join-Path -Path $Path -ChildPath $Name
-    $TestsPath = Join-Path -Path $FolderPath -ChildPath "Tests"
     $ArtifactsPath = Join-Path -Path $FolderPath -ChildPath "Artifacts"
     $JSONPath = Join-Path -Path $FolderPath -ChildPath "Lesson.json"
     $null = New-Item -Path $FolderPath -ItemType Directory
-    $null = New-Item -Path $TestsPath -ItemType Directory
     $null = New-Item -Path $ArtifactsPath -ItemType Directory
     foreach($Artifact in $Artifacts){
         Copy-Item -Path $Artifact -Destination $ArtifactsPath -Recurse
