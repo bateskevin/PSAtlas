@@ -23,62 +23,80 @@ while creating a PWSHSchool lesson. Let me show it to you.
 
 # How to build your lesson
 
-## Root Folder
+PWSHSchool provides you with a set of cmdlets to create lessons. 
 
-Your Rootfolder will have the name of your lesson. **Make sure it does not contain spaces or weird characters**
+Creating a lesson contains two steps.
 
-### Lesson.json 
+## Create a lesson
 
-In your root folder you will need a "Lesson.json" file. 
+You can create a lesson with the following command:
 
-![LessonJSON](../Img/LessonJSON.PNG)
+```
+New-PWSHSchoolLesson
+```
 
-You will have to set the following values:
+it does require a few inputs in order for it to work.
 
-1. **Name** --> This will be the name of your lesson (so choose it wisely ;))
+Example:
 
-2. **Level** --> This will indicate how difficult your lesson is gonna be. 
- you can choose one of the following values for the level of your lesson:
-  * Beginner
-  * Intermediate
-  * Advanced
-  * Expert
- 
- 3. **Prerequisites** --> If your lessons requires modules you should put its name here. PWSHSchool is then going to download it before the lesson starts. **This is for Modules on the Gallery**
- 
- 4. **Artifacts** --> If you want to load Modules that are not in the gallery you can add a Folder (the folder should have the same name as the module file it contains) to the Artifacts folder. The Artifacts Folder should be stored in the root folder. 
- 
- ## Step Folder 
- 
- step folders are located in the root folder. The naming convention should be alphabetically, 
- so that they get executed in the right order. I myself just name them "step1","Step2",etc.
- 
- here is what they contain:
- 
- ### Step.json
- 
- The Step.json file should contain the following information:
- 
- ![StepJSON](../Img/StepJSON.PNG)
- 
-1. **Title** --> This will be the Title of this step.
+```
+New-PWSHSchoolLesson -Name "YourLessonName" -Level "Beginner" -Prerequisites "YourModuleOne","YourModuleTwo" -Artifacts "PathToYourModuleThree","PathToYourModuleFour"
+```
 
-2 **Description** --> This will be the task-position you leave the people who do your lesson. Make it very clear what you want them to do.
+### Parameter
 
-3. **Hint** --> If you feel like it's needed, you can leave a hint to how this task could get solved. The Hints can get called by the people who do your lesson.
+#### Path
 
-### Template.ps1
-  
-  Also in the step you add a template.ps1 file. **It is important you respect the naming convention**.
-  
-  This File should contain a function that returns a value in the end. 
-  Like this the Pester tests will pick up that value and work with that. 
-  
-  Also it should be well commented, so the user knows where to change stuff and where not.
-  
-  For example such a function could look like this (Example of Variable_Types lesson):
-  
- ```
+The Path parameter will be the location where your lesson will be saved. Note that the Name parameter (below) will be the name of the folder and the Path parameter really is only the path to your lesson folder. 
+
+You can also ignore it and your lesson will be created at the current location of your shell.
+
+#### Name 
+
+The Name parameter will be the name of the folder containing your lesson. Also it will be Name of your lesson in PWSHSchool.
+
+#### Level
+
+You can set one of 4 values here
+
+* Beginner
+* Intermediate
+* Advanced
+* Expert
+
+Set the level according to how hard your lesson is gonna be to solve.
+
+#### Prerequisites
+
+Here you can pass your prerequisites. So if you want to have the module(s) loaded you created you can pass it here. **Note that prerequisites is for modules on the gallery only.**
+
+#### Artifacts
+
+If your module is not deployed to the gallery you can add it via the artifacts parameter. Just pass the path(s) to your modules here and they will be included in the lesson.
+
+## Create a Step
+
+Once you have created a lesson you can go ahead and create multiple steps for your lesson. 
+
+```
+New-PWSHSchoolStep
+```
+
+it does require a few inputs in order for it to work.
+
+Example:
+
+```
+New-PWSHSchoolStep -Lesson "PathToYourLesson" -Title "Title of your Step" -Description "Here you fill in what the Task for this step is" -Hint "Add a hint here if needed" -Template "PathToYourTemplate\Template.ps1" -Test "PathToYourTest\Test.Tests.ps1"
+```
+
+### Template
+
+For each step you will have to create a code template that the user then can edit. Make sure to comment your sample code to make it as clear as possible to the user what he has to do. 
+
+For example:
+
+```
  Function Define-Datatype {
     
     #create your variable under here
@@ -90,21 +108,14 @@ You will have to set the following values:
 
 # Save your code when finished and continue in the shell you started the Lesson.
  ```
- It does not have to be functional, in fact in the start it **should** fail the tests. 
  
- ### Tests
+ ### Test
  
- This is the heart and soul of your task as a contributor. The test folder lies in each step folder.
+ For each step you will have to add a test that tests the code that the user edited. 
  
- Write your test(s) for each step and put them in the Tests folder. 
+ For example:
  
- These Tests should then test, if the user altered the code correctly.
- 
- The user will see the error messages pester creates if they fail. So also here, try your best 
- to make your tests as meaningfull as possible. 
- 
- As an example, here is the test, that tests the function mentioned above:
- 
+  
  ```
  $File = (Get-Childitem "$PSScriptRoot\..\" -File) | ?{$_.name -ne "Template.ps1" -and $_.name -ne "Step.json"}  | select fullname
 
@@ -119,7 +130,44 @@ Describe "Testing Step1" {
     }
 }
  ```
-The Part of this code untill Import-Module pester will load the correct function. (The file the user is working on is a file that will be in the step folder). Take this and just adapt the test in the describe block.
+ 
+Make sure to add the following code at the start of your test:
+
+ ```
+ $File = (Get-Childitem "$PSScriptRoot\..\" -File) | ?{$_.name -ne "Template.ps1" -and $_.name -ne "Step.json"}  | select fullname
+
+. $File.Fullname
+
+Import-Module Pester
+ ```
+ 
+ With this code at the start of your test, pester will be loaded and also the file the user is editing in the current step will be loaded in to the test and you can use the edited code.
+
+### Parameter 
+
+#### Lesson
+
+Pass the path to the lesson you made.
+
+#### Title
+
+Enter the name of the step here
+
+#### Description
+
+Enter the description of your task here. This is the information the user is gonna have to solve your task, so try to make it as meaningfull as you can.
+
+#### Hint
+
+If you want you can add a Hint for your task, which the user then can call while solving your task.
+
+#### Template
+
+Pass the path to the file you prepared for this step. 
+
+#### Test
+
+Pass the path to the Test you created to test the code that the user edits.
 
 # How do I add it to the module?
 
