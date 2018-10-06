@@ -7,6 +7,8 @@ PWSHSchool is all about gaining/sharing expirience. Join in to absolve
 the lessons and learn new stuff other people submitted or if you feel
 confortable sharing your knowledge contribute lessons yourself. 
 
+Provide a interactive way to learn about your project by adding a lesson on it on PWSHSchool.
+
 ## Learn how to use it
 
 Check out the [documentation for the students](docs/Students.md)
