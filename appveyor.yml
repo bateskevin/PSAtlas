@@ -1,6 +1,6 @@
 environment:
   access_token:
-    secure: 0skQZS3raRtshDg3zZ8vbku0Zi0p5o+AeU0Jr/SQugHK/nA7Y40YOvfNoPb9eTVR
+    secure: fdd2f1bbc22dccd0df98d690ffafecb6dad0070f
 
 install:
 - ps: >-
