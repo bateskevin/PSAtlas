@@ -1,0 +1,15 @@
+
+ ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
+|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
+|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
+|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
+|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
+|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
+
+Here are the things you can Run:
+
+Test : Test your solution by typing test.
+Skip : Skip this lesson and move on to the next one
+                    
+if you want to quit the Lesson hit ctrl + C. 
+Remember that you will have to save your code in ISE to have it avaiable later on.
