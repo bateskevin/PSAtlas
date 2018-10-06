@@ -46,6 +46,7 @@ Function Start-PWSHSchoolLesson {
     process {
 
         $ModulePath = Split-path (Get-Module -name PWSHSchool).Path
+        $StringPath = Join-Path -Path $ModulePath -ChildPath "Style"
         $LessonFolderPath = Join-Path -Path $ModulePath -ChildPath "Lessons"
         Clear-Host
         $LessonPath = Join-Path -Path $LessonFolderPath -ChildPath $Lesson
@@ -56,39 +57,15 @@ Function Start-PWSHSchoolLesson {
 
         if($LessonObj.Artifacts){
             foreach($Artifact in $LessonObj.Artifacts){
-                try{
-                    Write-Host @"
-
- ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
-|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
-|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
-|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
-|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
-|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
-
-The Lesson you're about to do uses local prerequisites. We are about to import them.
-
-
-"@ -ForegroundColor Green -BackgroundColor Black
+                try{   
+                    Write-String (Join-Path -Path $StringPath -ChildPath "Prerequisites.txt" ) -type "Info"
                     $ArtifactPath = join-path -Path $LessonPath -ChildPath "Artifacts"
                     foreach($Folder in $ArtifactPath){
                         $ModuleFile = Join-Path $ArtifactPath -ChildPath "$($Artifact)\$($Artifact).psd1"
                         Import-Module $ModuleFile -Force -Verbose
                     } 
                 }catch{
-                    Write-Host @"
-
- ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
-|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
-|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
-|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
-|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
-|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
-
-The local Prerequisites could not be installed.
-
-
-"@ -ForegroundColor Green -BackgroundColor Black
+                    Write-String (Join-Path -Path $StringPath -ChildPath "PrereqFailed.txt" ) -type "Info"
                 break
                 }
             }
@@ -98,35 +75,10 @@ The local Prerequisites could not be installed.
             Clear-Host
             foreach($Prereq in $LessonObj.Prerequisites){
                 try{
-                    Write-Host @"
-
- ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
-|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
-|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
-|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
-|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
-|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
-
-The Lesson you're about to do uses prerequisites. We are about to download them. You can interfeer in the process.
-
-
-"@ -ForegroundColor Green -BackgroundColor Black
-
+                    Write-String (Join-Path -Path $StringPath -ChildPath "PrereqOnline.txt" ) -type "Info"
                     find-Module $Prereq | Install-Module -Verbose 
                 }catch{
-                    Write-Host @"
-
- ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
-|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
-|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
-|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
-|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
-|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
-
-The Prerequisites could not be installed.
-
-
-"@ -ForegroundColor Green -BackgroundColor Black
+                    Write-String (Join-Path -Path $StringPath -ChildPath "PrereqFailed.txt" ) -type "Info"
                 break
                 }
             }
@@ -184,23 +136,8 @@ The Prerequisites could not be installed.
                     }else{
 
                         Clear-Host
-                        Write-Host @"
-
- ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
-|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
-|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
-|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
-|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
-|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
-
-Here are the things you can Run:
-
-Test : Test your solution by typing test.
-Skip : Skip this lesson and move on to the next one
-                    
-if you want to quit the Lesson hit ctrl + C. 
-Remember that you will have to save your code in ISE to have it avaiable later on.
-
+                        Write-String (Join-Path -Path $StringPath -ChildPath "LandingPage.txt" ) -type "Info"    
+                        write-host @"
 You are currently on Step $Count of $StepCount
 
 Not quite there yet!
@@ -212,36 +149,20 @@ $($Step.Description)
 Your code failed with the following message:
 
 
-"@ -ForegroundColor Green -BackgroundColor Black
-                    write-host $($TestResult.TestResult.FailureMessage) -ForegroundColor Red -BackgroundColor Black
-                    write-host ""
+"@ -BackgroundColor Black -ForegroundColor Green
+                        write-host $($TestResult.TestResult.FailureMessage) -ForegroundColor Red -BackgroundColor Black
                     }
                 }else{
                    
-            Write-Host @"
-
- ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
-|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
-|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
-|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
-|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
-|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
-
-Here are the things you can Run:
-
-Test : Test your solution by typing test.
-Skip : Skip this lesson and move on to the next one
-                    
-if you want to quit the Lesson hit ctrl + C. 
-Remember that you will have to save your code in ISE to have it avaiable later on.
-
+                    Write-String (Join-Path -Path $StringPath -ChildPath "LandingPage.txt" ) -type "Info"
+                    Write-Host @"
 You are currently on Step $Count of $StepCount
 
 $($Step.Title)
 
 $($Step.Description)
 
-"@ -ForegroundColor Green -BackgroundColor Black
+"@ -BackgroundColor Black -ForegroundColor Green
             }                
 
                 if($next -eq "Skip"){
@@ -258,22 +179,7 @@ $($Step.Description)
     #Clear-PWSHSchoolLesson -Lesson Variable_Datatypes
 
     Clear-Host
-    Write-Host @"
-
- ____  __          __  _______  __    __  _______  _______  __    __  _______  _______  ___
-|    |\  \        /  /|       ||  |  |  ||       ||       ||  |  |  ||       ||       ||   |
-|    | \  \      /  / |   ____||  |__|  ||   ____||   ____||  |__|  ||   _   ||   _   ||   |
-|   _|  \  \_/\_/  /   _____   |   __   | ____    |  |____ |   __   ||  |_|  ||  |_|  ||   |___ 
-|  |     \        /   |       ||  |  |  ||       ||       ||  |  |  ||       ||       ||       |
-|__|      \__/\__/    |_______||__|  |__||_______||_______||__|  |__||_______||_______||_______|
-
-Congratulations! you finished Lesson $($LessonObj.Name)
-                    
-Thank you for using PWSHSchool. If you are interessted why not start the next lesson? ;)
-
-Cheers!
-
-"@ -ForegroundColor Green -BackgroundColor Black
+    Write-String (Join-Path -Path $StringPath -ChildPath "LessonFinished.txt" ) -type "Info"
               
     }
 }

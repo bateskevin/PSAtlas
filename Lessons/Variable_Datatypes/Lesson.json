@@ -2,10 +2,6 @@
 
     "Name" : "Variable_Types",
 
-    "Level" : "Beginner",
-
-    "Prerequisites" : "PSMD",
-
-    "Artifacts" : "PSHTML"
+    "Level" : "Beginner"
 
 }
