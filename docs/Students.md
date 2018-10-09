@@ -72,12 +72,18 @@ Ok you started your Lesson. Now the console you started in will become your Inte
 Note that in the console you will at all time see on which step you are, what your current task is and you also
 get displayed what you can enter in the console. 
 
-### ISE --> Editor
-Next to the console getting your interface, Powershell ISE will start up and load your first task. 
+### Editor --> VSCode
+Next to the console getting your interface, VSCode will start up and load your first task.
+
+optionally you can start PWSHSchool with Powershell ISE if you like. Just add the "StartWithISE" parameter to your call.
+
+```
+Start-PWSHSchoolLesson -Lesson Variable_Datatypes -StartWithISE
+```
 
 As an example. The first task from the Variable_Types Lesson will look like this in the ISE
 
-![ISETask](../Img/ISETask.PNG)
+![ISETask](../Img/CodeTask.PNG)
 
 ## Edit and test your code
 
