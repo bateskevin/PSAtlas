@@ -2,7 +2,7 @@ Function Start-PWSHSchoolLesson {
 
     [CmdletBinding()]
     Param(
-        # Any other parameters can go here
+        [switch]$StartWithISE
     )
 
     DynamicParam {
@@ -91,7 +91,6 @@ Function Start-PWSHSchoolLesson {
         $count++
             $LessonFinished = $false
             $next = ""
-
             $StepPath = Split-Path $Step.Path
             $LessonFilePath = Join-Path -Path $StepPath -ChildPath "$($Step.Title).ps1"
 
@@ -100,7 +99,11 @@ Function Start-PWSHSchoolLesson {
                     $already = Read-Host "You already started this lesson, do you whish to continue? (Y/N) - Carefull, by selecting no you will loose your progress!"
                     Clear-Host
                     if($already -eq "Y"){
-                       ise -file $LessonFilePath 
+                        if($StartWithISE){
+                            ise -file $LessonFilePath
+                        }else{
+                            code $LessonFilePath
+                        } 
                     }elseif($already -eq "N"){
                         Remove-Item $LessonFilePath
                         $null = New-Item -ItemType File -Path $LessonFilePath
@@ -122,8 +125,12 @@ Function Start-PWSHSchoolLesson {
                     $Templatecontent | out-file -FilePath $LessonFilePath -Append
                 }
             }
-            ise -file $LessonFilePath
-            $LessonFinished = $false 
+            if($StartWithISE){
+                ise -file $LessonFilePath
+            }else{
+                code $LessonFilePath
+            }
+                $LessonFinished = $false 
             while(!($LessonFinished )){
             
             if($next -eq "Test"){
