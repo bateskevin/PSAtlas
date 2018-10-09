@@ -81,7 +81,7 @@ optionally you can start PWSHSchool with Powershell ISE if you like. Just add th
 Start-PWSHSchoolLesson -Lesson Variable_Datatypes -StartWithISE
 ```
 
-As an example. The first task from the Variable_Types Lesson will look like this in the ISE
+As an example. The first task from the Variable_Types Lesson will look like this in VSCode:
 
 ![ISETask](../Img/CodeTask.PNG)
 
