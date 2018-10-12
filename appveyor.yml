@@ -9,8 +9,16 @@ install:
     Install-Module -Name PSScriptAnalyzer -Force
     
     Install-Module -Name Pester -Force
+- pwsh >-
+    Install-PackageProvider -Name NuGet -Force
+    
+    Install-Module -Name PSScriptAnalyzer -Force
+    
+    Install-Module -Name Pester -Force
     
 build: off
 test_script:
 - ps: >- 
+    .\CI\build.ps1
+- pwsh: >- 
     .\CI\build.ps1
