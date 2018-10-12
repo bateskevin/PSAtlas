@@ -17,7 +17,7 @@ Class Step {
         
         $StepPath = split-path $StepCFG
         $TemplatePath = Join-Path -Path $StepPath -ChildPath "Template.ps1"
-        $TestPath = Join-Path -Path $StepPath -ChildPath "Tests\Step.Tests.ps1"
+        $TestPath = Join-Path -Path $StepPath -ChildPath "Tests/Step.Tests.ps1"
 
         $This.Template = $TemplatePath
         $This.Test = $TestPath
