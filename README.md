@@ -6,7 +6,9 @@ Powershell Module to absolve Lessons about Powershell
 | Name        | Status           |
 |---------------|-------------| 
 | Master Branch      | [![Build status](https://ci.appveyor.com/api/projects/status/77l7qfo5jqva7pie/branch/master?svg=true)](https://ci.appveyor.com/project/bateskevin/pwshschool/branch/master)      |
+| Powershell Core | [![Build status](https://ci.appveyor.com/api/projects/status/am09v1crbqhue7px?svg=true)](https://ci.appveyor.com/project/bateskevin/pwshschool-vt7jr)
 | Current Build      | ![Build status](https://ci.appveyor.com/api/projects/status/77l7qfo5jqva7pie?svg=true)     |
+
 
 ## Create or absolve Lessons
 PWSHSchool is all about gaining/sharing expirience. Join in to absolve 
