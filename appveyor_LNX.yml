@@ -21,3 +21,7 @@ test_script:
     $Children.Fullname
     
     Invoke-Expression $Children.Fullname
+    
+    $Module = (get-Item -Path /home/appveyor/projects/pwshschool-tr7fa/PWSHSchool.psd1).Fullname
+    
+    Import-Module $Module -Force
