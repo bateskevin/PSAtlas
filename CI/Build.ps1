@@ -50,7 +50,7 @@ if($res.FailedCount -eq 0 -and $APPVEYOR_REPO_COMMIT_MESSAGE -match '^.*dep-psga
 }
 
 #Updating Manifest (Module Version)
-$manifestpath = ".\"+"$env:APPVEYOR_PROJECT_NAME"+".psd1"
+$manifestpath = ".\"+"PWSHSchool"+".psd1"
 $manifest = Test-ModuleManifest -Path $manifestPath
 [System.Version]$version = $manifest.Version
 if($env:APPVEYOR_REPO_COMMIT_MESSAGE -match '\[(Major)\]'){
