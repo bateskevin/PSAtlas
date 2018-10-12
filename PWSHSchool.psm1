@@ -4,7 +4,7 @@ $ScriptPath = $Scriptpath.Replace('\','/')
 
 write-verbose "Loading Private Classes"
 
-$PrivateClasses = Get-Childitem -Path "$ScriptPath/Classes/private" | Select -Expand FullName | sort -Descending
+$PrivateClasses = Get-Childitem -Path "$ScriptPath/Classes/private/" | Select -Expand FullName | sort -Descending
 
 
 
