@@ -15,4 +15,5 @@ install:
 build off:
 
 test_script:
-- pwsh: Invoke-Pester -Path "./Tests"
+- pwsh: >-
+    Invoke-Pester -Path "./Tests"
