@@ -3,9 +3,7 @@ environment:
     secure: fdd2f1bbc22dccd0df98d690ffafecb6dad0070f
 
 install:
-- pwsh: >-
-    Install-PackageProvider -Name NuGet -Force
-    
+- pwsh: >- 
     Install-Module -Name PSScriptAnalyzer -Force
     
     Install-Module -Name Pester -Force
