@@ -27,7 +27,7 @@ InModuleScope PWSHSchool {
         Context "Base functionality" {
             $Global:Obj = Get-PWSHSchoolLesson -Name "comments"
             it "[PWSHSchool][Function][Get-PWSHSchoolLesson] Name should be 'Comments'." {
-                $Obj.name | Should -BeLike "Comments"
+                $Obj.Name | Should -BeLike "Comments"
             }
 
             it "[PWSHSchool][Function][Get-PWSHSchoolLesson] Level should be 'Beginner'." {
