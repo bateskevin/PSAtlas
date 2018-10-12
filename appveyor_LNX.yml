@@ -10,10 +10,12 @@ install:
     
     Install-Module -Name Pester -Force -Scope CurrentUser
     
-    Import-Module ./PWSHSchool.psd1
-
-build off:
-
+build: off
 test_script:
-- pwsh: >-
-    Invoke-Pester -Path "./Tests"
+- pwsh: >- 
+    Get-ChildItem -Path /home/appveyor/projects/pwshschool-tr7fa/ -recurse
+    $Children = Get-ChildItem -Path /home/appveyor/projects/pwshschool-tr7fa/CI/
+    
+    $Children.Fullname
+    
+    Invoke-Expression $Children.Fullname
