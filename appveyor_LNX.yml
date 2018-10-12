@@ -13,4 +13,4 @@ install:
 build: off
 test_script:
 - pwsh: >- 
-    & '/home/appveyor/projects/pwshschool/CI/build.ps1'
+    & '/home/appveyor/projects/pwshschool-tr7fa/CI/build.ps1'
