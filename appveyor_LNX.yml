@@ -12,4 +12,4 @@ install:
     
     Import-Module ./PWSHSchool.psd1
     
-   $res = Invoke-Pester -Path ./Tests -PassThru
+   Invoke-Pester -Path ./Tests
