@@ -13,4 +13,6 @@ install:
 build: off
 test_script:
 - pwsh: >- 
-    & '/home/appveyor/projects/pwshschool-tr7fa/CI/build.ps1'
+    Get-Childitem -path /home/appveyor/projects/pwshschool-tr7fa -recurse
+    
+    /home/appveyor/projects/pwshschool-tr7fa/CI/build.ps1
