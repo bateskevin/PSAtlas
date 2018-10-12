@@ -14,7 +14,7 @@ build: off
 test_script:
 - pwsh: >- 
 
-    Get-ChildItem -Path /home/appveyor/projects/pwshschool-tr7fa/CI/
+    Get-ChildItem -Path /home/appveyor/projects/pwshschool-tr7fa/
 
     $Children = Get-ChildItem -Path /home/appveyor/projects/pwshschool-tr7fa/CI/
     
