@@ -4,7 +4,11 @@ $ScriptPath = $Scriptpath.Replace('\','/')
 
 write-verbose "Loading Private Classes"
 
-Get-ChildItem /home/appveyor/projects/pwshschool-tr7fa -Recurse
+if($IsLinux){
+    
+    $ScriptPath = "/home/appveyor/projects/pwshschool-tr7fa"
+
+}
 
 $PrivateClasses = Get-Childitem -Path "$ScriptPath/Classes/private/" | Select -Expand FullName | sort -Descending
 
