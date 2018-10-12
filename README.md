@@ -5,9 +5,8 @@ Powershell Module to absolve Lessons about Powershell
 ### Appveyor
 | Name        | Status           |
 |---------------|-------------| 
-| Master Branch      | [![Build status](https://ci.appveyor.com/api/projects/status/77l7qfo5jqva7pie/branch/master?svg=true)](https://ci.appveyor.com/project/bateskevin/pwshschool/branch/master)      |
-| Powershell Core      | [![Build status](https://ci.appveyor.com/api/projects/status/adwo8qal23fp15qk?svg=true)](https://ci.appveyor.com/project/bateskevin/pwshschool-pj177) |
-| Current Build      | ![Build status](https://ci.appveyor.com/api/projects/status/77l7qfo5jqva7pie?svg=true)     |
+| Powershell v5.1      | [![Build status](https://ci.appveyor.com/api/projects/status/77l7qfo5jqva7pie/branch/master?svg=true)](https://ci.appveyor.com/project/bateskevin/pwshschool/branch/master)      |
+| Powershell Core (Windows)      | [![Build status](https://ci.appveyor.com/api/projects/status/adwo8qal23fp15qk?svg=true)](https://ci.appveyor.com/project/bateskevin/pwshschool-pj177) |
 
 
 ## Create or absolve Lessons
