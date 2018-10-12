@@ -1,8 +1,6 @@
 $ScriptPath = Split-Path $MyInvocation.MyCommand.Path
 
-
-
-
+$ScriptPath = $Scriptpath.Replace('\','/')
 
 write-verbose "Loading Private Classes"
 
