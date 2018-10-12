@@ -13,4 +13,4 @@ install:
 build: off
 test_script:
 - pwsh: >- 
-    .\CI\build.ps1
+    /CI/build.ps1
