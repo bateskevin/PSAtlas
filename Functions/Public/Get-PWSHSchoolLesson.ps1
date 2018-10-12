@@ -22,6 +22,15 @@ function Get-PWSHSchoolLesson {
         }
     }
 
-    $RetObj = [Lesson]::new($arr)
-    return $RetObj
+    $ObjArr = @()
+
+    Foreach($JSONFile in $Arr){
+        try{
+            $RetObj = [Lesson]::new($JSONFile)
+            $ObjArr += $RetObj
+        }catch{
+            
+        }
+    }
+    return $ObjArr
 }

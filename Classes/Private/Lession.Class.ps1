@@ -13,7 +13,7 @@ Class Lesson {
     [Step[]]$Step
 
     Lesson($LessonCFG){
-        $JSON = (Get-Content $LessonCFG) -join "`n" | ConvertFrom-Json
+        $JSON = (Get-Content $LessonCFG -ErrorAction Stop) -join "`n" | ConvertFrom-Json -ErrorAction Stop
 
         $This.Name = $JSON.Name
         $This.Level = $JSON.Level

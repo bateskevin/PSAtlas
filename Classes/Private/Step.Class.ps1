@@ -8,7 +8,7 @@ Class Step {
 
     Step ($StepCFG){
 
-        $JSON = (Get-Content $StepCFG) -join "`n" | ConvertFrom-Json
+        $JSON = (Get-Content $StepCFG -ErrorAction Stop) -join "`n" | ConvertFrom-Json -ErrorAction Stop
 
         $This.Title = $JSON.Title
         $This.Description = $JSON.Description
