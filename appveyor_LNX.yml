@@ -1,0 +1,16 @@
+image: ubuntu
+
+environment:
+  access_token:
+    secure: fdd2f1bbc22dccd0df98d690ffafecb6dad0070f
+
+install:
+- pwsh: >- 
+    Install-Module -Name PSScriptAnalyzer -Force
+    
+    Install-Module -Name Pester -Force
+    
+build: off
+test_script:
+- pwsh: >- 
+    .\CI\build.ps1
