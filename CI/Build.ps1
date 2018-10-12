@@ -25,7 +25,10 @@ function Update-CodeCoveragePercent {
 #Importing Modules
 import-module pester
 start-sleep -seconds 2
-Get-Module Pester
+
+    $Module = (get-Item -Path /home/appveyor/projects/pwshschool-tr7fa/PWSHSchool.psd1).Fullname
+    Import-Module $Module -Force
+    Get-Module PWSHSchool
 
 #Pester Tests
 write-verbose "invoking pester"
