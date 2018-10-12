@@ -13,6 +13,4 @@ install:
 build: off
 test_script:
 - pwsh: >- 
-    Get-Childitem -path /home/appveyor/projects/pwshschool-tr7fa -recurse
-    
-    /home/appveyor/projects/pwshschool-tr7fa/CI/build.ps1
+    Get-Item /home/appveyor/projects/pwshschool-tr7fa/CI/build.ps1 | invoke-expression
