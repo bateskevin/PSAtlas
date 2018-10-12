@@ -6,7 +6,7 @@ Push-Location -Path $RootFolder.FullName
 
 set-location -Path $RootFolder.FullName
 
-Import-module ".\PWSHSchool" -force
+Import-module "./PWSHSchool" -force
 
   $Path = "$PSScriptRoot\..\Classes\Private"
   $PrivateClasses = gci "$Path" -Filter "*.Class.ps1" | Select -Expand FullName | sort -Descending
