@@ -12,4 +12,4 @@ install:
     
     Import-Module ./PWSHSchool.psd1
     
-   Invoke-Pester -Path "./Tests"
+    Invoke-Pester -Path "./Tests"
