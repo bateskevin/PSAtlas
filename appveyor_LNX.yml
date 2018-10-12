@@ -13,9 +13,7 @@ install:
 build: off
 test_script:
 - pwsh: >- 
-    Get-ChildItem -Path /home/appveyor/projects/pwshschool-tr7fa/ -recurse
-    $Children = Get-ChildItem -Path /home/appveyor/projects/pwshschool-tr7fa/CI/
     
-    $Children.Fullname
+    $Children = Get-ChildItem -Path /home/appveyor/projects/pwshschool-tr7fa/CI/
     
     Invoke-Expression $Children.Fullname
