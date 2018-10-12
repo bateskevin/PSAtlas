@@ -11,5 +11,8 @@ install:
     Install-Module -Name Pester -Force -Scope CurrentUser
     
     Import-Module ./PWSHSchool.psd1
-    
-    Invoke-Pester -Path "./Tests"
+
+build off:
+
+test_script:
+- pwsh: Invoke-Pester -Path "./Tests"
