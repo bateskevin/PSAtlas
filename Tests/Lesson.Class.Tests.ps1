@@ -6,7 +6,7 @@ Push-Location -Path $RootFolder.FullName
 
 set-location -Path $RootFolder.FullName
 
-Import-module "./PWSHSchool" -force
+#Import-module "./PWSHSchool" -force
 
 InModuleScope PWSHSchool {
   Describe "Testing Class PWSHSchool Lesson" {
