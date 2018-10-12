@@ -10,12 +10,7 @@ install:
     
     Install-Module -Name Pester -Force
     
-- pwsh:Install-Module -Name PSScriptAnalyzer -Force
-- pwsh:Install-Module -Name Pester -Force
-    
 build: off
 test_script:
 - ps: >- 
-    .\CI\build.ps1
-- pwsh: >- 
     .\CI\build.ps1
