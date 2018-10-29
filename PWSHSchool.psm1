@@ -36,16 +36,11 @@ foreach ($privateCL in $PrivateClasses){
 
 
 
-<#
+
 
 write-verbose "Loading Private Functions"
 
 $PrivateFunctions = gci "$ScriptPath\Functions\Private" -Filter *.ps1 | Select -Expand FullName
-
-
-
-
-
 
 
 foreach ($Private in $PrivateFunctions){
@@ -64,7 +59,6 @@ foreach ($Private in $PrivateFunctions){
 
 }
 
-#>
 
 write-verbose "Loading Public Functions"
 

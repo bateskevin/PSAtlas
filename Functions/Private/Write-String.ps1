@@ -34,13 +34,13 @@ Function Write-String {
 
     if($type -eq "Info"){
         foreach($line in $Content){
-            write-host $line -BackgroundColor Black -ForegroundColor Green
+            write-host $line -ForegroundColor Cyan
         }
     }
 
     if($type -eq "Task"){
         foreach($line in $Content){
-            write-host $line -BackgroundColor Black -ForegroundColor Cyan
+            write-host $line -ForegroundColor Gray
         }
     }
 }
