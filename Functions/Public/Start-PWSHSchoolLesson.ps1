@@ -62,7 +62,7 @@ Function Start-PWSHSchoolLesson {
 
         Foreach($Step in $LessonObj.Step){
             $count++
-            Write-Step -Lesson $Lesson
+            Write-Step -Lesson $Lesson -Step $Step
         }
 
         Write-End -Lesson $Lesson

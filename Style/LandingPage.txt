@@ -9,6 +9,7 @@
 Here are the things you can Run:
 
 Test : Test your solution by typing test.
+Hint : See if there is a hint available if you don't understand the task.
 Skip : Skip this lesson and move on to the next one
                     
 if you want to quit the Lesson hit ctrl + C. 

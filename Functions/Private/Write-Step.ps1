@@ -2,7 +2,8 @@
 Function Write-Step {
 
     param (
-        $Lesson
+        $Lesson,
+        $Step
     )
 
     $ModulePath = Split-path (Get-Module -name PWSHSchool).Path
@@ -86,8 +87,28 @@ $($Step.Description)
                         write-host $($TestResult.TestResult.FailureMessage) -ForegroundColor Red
                         write-Host ""
                     }
+                }elseif($next -eq "Hint"){
+                    Clear-Host
+                    Write-String (Join-Path -Path $StringPath -ChildPath "LandingPage.txt" ) -type "Info"
+                    write-host @"
+You are currently on Step $Count of $StepCount
+
+Not quite there yet!
+
+$($Step.Title)
+
+$($Step.Description)
+
+"@  -ForegroundColor Gray
+                    if($Step.Hint){
+                        Write-Host "Hint: $($Step.Hint)" -ForegroundColor Yellow
+                        write-host ""
+                    }else{
+                        Write-Host "Hint: For this step there is no Hint available." -ForegroundColor Yellow
+                        write-host ""
+                    }
                 }else{
-                   
+                    Clear-Host
                     Write-String (Join-Path -Path $StringPath -ChildPath "LandingPage.txt" ) -type "Info"
                     Write-Host @"
 You are currently on Step $Count of $StepCount
