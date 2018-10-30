@@ -6,7 +6,7 @@ write-verbose "Loading Private Classes"
 
 if($IsLinux){
     
-    $ScriptPath = "/home/appveyor/projects/pwshschool-tr7fa"
+    $ScriptPath = "/home/appveyor/projects/pwshschool-tr7fa/PWSHSchool"
 
 }
 
