@@ -21,7 +21,7 @@ Provide a interactive way to learn about your project by adding a lesson on it o
 
 Check out the [documentation for the students](docs/Students.md)
 
-## Install the Module (Not yet available on the Gallery. Gonna upload it soon)
+## Install the Module
 
 ```
 Find-Module -Name PWSHSchool | Install-Module
