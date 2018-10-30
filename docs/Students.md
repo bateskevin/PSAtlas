@@ -93,7 +93,7 @@ So the Workflow is the Following:
 
 * Read the Task in the Console
 * Edit your code according to the Task in the console
-* Save your code in the ISE
+* Save your code in the editor 
 * now you can run a test
 
 ## Test your code
