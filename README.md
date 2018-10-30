@@ -41,9 +41,9 @@ Wanna contribute? please take a look at these files before you start:
 
 ### Todo List
 
-- [ ] Add support for Artifacts
-- [ ] Upload to the gallery
-- [ ] Maybe some style ideas
+- [X] Add support for Artifacts
+- [X] Upload to the gallery
+- [X] Maybe some style ideas
 
 ## Documentation on the Project
 
