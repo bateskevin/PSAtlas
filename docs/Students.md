@@ -8,7 +8,7 @@ First of all let's look at what steps are needed for you to be able to use PWSHS
 
 ## Prerequisites
 
-### Install the Module (Not yet available on the Gallery. Gonna upload it soon)
+### Install the Module
 
 ```
 Find-Module -Name PWSHSchool | Install-Module
@@ -54,6 +54,8 @@ Variable_Types Beginner {Step, Step}
 ```
 
 ## Start a lesson
+
+Important: The powershell console you start your lesson from should have administrative privileges.
 
 Once you found a lesson you can start a lesson with the following code:
 ```
