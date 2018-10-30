@@ -12,13 +12,13 @@ InModuleScope PWSHSchool {
   Describe "Testing Class PWSHSchool Step" {
       Context "Base functionality" {
           it "[PWSHSchool][Class][Step] Creating an instance" {
-              {[Step]::new(".\Lessons\Variable_Datatypes\Step1\Step.json")} | should not throw
+              {[Step]::new("./PWSHSchool/Lessons/Variable_Datatypes/Step1/Step.json")} | should not throw
           }
       }
 
       Context "Properties" {
 
-          $Step = [Step]::new(".\Lessons\Variable_Datatypes\Step1\Step.json")
+          $Step = [Step]::new("./PWSHSchool/Lessons/Variable_Datatypes/Step1/Step.json")
 
           it "[PWSHSchool][Class][Step] The Title Property should not be empty" {
               $Step.Title | should not BeNullOrEmpty
