@@ -52,7 +52,7 @@ if(!($IsLinux)){
     }
 
     #Updating Manifest (Module Version)
-    $manifestpath = "./PWSHSchool"+"PWSHSchool"+".psd1"
+    $manifestpath = "./PWSHSchool/"+"PWSHSchool"+".psd1"
     $manifest = Test-ModuleManifest -Path $manifestPath
     [System.Version]$version = $manifest.Version
     if($env:APPVEYOR_REPO_COMMIT_MESSAGE -match '\[(Major)\]'){
