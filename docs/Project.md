@@ -1,6 +1,6 @@
 ![PWSHSchool](../Img/PWSHSchool.png)
 
-#Class documentation
+## Class documentation
 
 I use two classes. I'll let [PSClassUtils](https://github.com/Stephanevg/PSClassUtils) speak for me here:
 
