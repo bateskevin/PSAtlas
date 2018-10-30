@@ -130,4 +130,4 @@ Clear-PWSHSchoolLesson -Lesson Variable_Datatypes
 
 ## That's it
 
-That it folks! You can now use PWSHSchool! Have fun learning!
+That's it folks! You can now use PWSHSchool! Have fun learning!
