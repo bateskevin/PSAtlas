@@ -69,4 +69,4 @@ if(!($IsLinux)){
     }else{
         write-host "Module would not be deployed to the psgallery" -forgroundcolor Yellow
     }
-}
+} 
