@@ -63,5 +63,10 @@ if(!($IsLinux)){
         [String]$newVersion = New-Object -TypeName System.Version -ArgumentList ($version.Major, $version.Minor, ($version.build + 1))
     }
     write-host "Going to increment Version number from $Version to $NewVersion"-forgroundcolor green
-    Update-ModuleManifest -Path $manifestPath -ModuleVersion $newVersion -CmdletsToExport '*' -FunctionsToExport '*' -VariablesToExport '*'
+    Update-ModuleManifest -Path $manifestPath -ModuleVersion $newVersion -CmdletsToExport @('Clear-PWSHSchoolLesson','Get-PWSHSchoolLesson','New-PWSHSchoolLesson','New-PWSHSchoolStep','Start-PWSHSchoolLesson') -FunctionsToExport @('Clear-PWSHSchoolLesson','Get-PWSHSchoolLesson','New-PWSHSchoolLesson','New-PWSHSchoolStep','Start-PWSHSchoolLesson') -VariablesToExport '*'
+    if($res.FailedCount -eq 0 -and $APPVEYOR_REPO_COMMIT_MESSAGE -match '^.*dep-psgallery$'){
+        write-host "Module would now be deployed to the psgallery" -forgroundcolor green
+    }else{
+        write-host "Module would not be deployed to the psgallery" -forgroundcolor Yellow
+    }
 }
