@@ -6,7 +6,9 @@ Import-Module Pester
 
 Describe "Testing Step2" {
     it "The variable should be of type [bool]" {
-        $variable = Define-Datatype
-        $variable | Should BeOfType bool
+        foreach($line in (Get-Content $File.Fullname)){
+            Invoke-Expression $line
+        }
+        $Test | Should BeOfType bool
     }
 }

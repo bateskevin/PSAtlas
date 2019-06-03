@@ -6,7 +6,9 @@ Import-Module Pester
 
 Describe "Testing Step1" {
     it "The variable should contain 'PWSHSchool'" {
-        $variable = Define-Datatype
-        $variable | Should BeExactly "PWSHSchool" 
+        foreach($line in (Get-Content $File.Fullname)){
+            Invoke-Expression $line
+        }
+        $Test | Should BeExactly "PWSHSchool" 
     }
 }
