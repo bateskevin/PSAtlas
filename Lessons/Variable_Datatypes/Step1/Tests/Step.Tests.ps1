@@ -10,5 +10,6 @@ Describe "Testing Step1" {
             Invoke-Expression $line
         }
         $Test | Should BeExactly "PWSHSchool" 
+        $Test = $null
     }
 }
