@@ -8,7 +8,7 @@ function New-AtlasGuide {
     )
 
     $GuideHash = @{}
-    $GuideHash.Name = $Name
+    $GuideHash.Name = $on
     $GuideHash.Level = $Level
     $GuideHash.Prerequisites = $Prerequisites
 
@@ -23,7 +23,7 @@ function New-AtlasGuide {
 
     $JSON = $GuideObj | ConvertTo-Json
 
-    $FolderPath = Join-Path -Path $Path -ChildPath $Name
+    $FolderPath = Join-Path -Path $Path -ChildPath $on
     $ArtifactsPath = Join-Path -Path $FolderPath -ChildPath "Artifacts"
     $JSONPath = Join-Path -Path $FolderPath -ChildPath "Guide.json"
     $null = New-Item -Path $FolderPath -ItemType Directory
