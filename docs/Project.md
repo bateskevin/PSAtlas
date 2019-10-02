@@ -2,7 +2,7 @@
 
 I use two classes. I'll let [PSClassUtils](https://github.com/Stephanevg/PSClassUtils) speak for me here:
 
-![ClassDiagram](../Img/ClassDiagram.png)
+![ClassDiagram](../Img/Private.png)
 
 ## Design
 
