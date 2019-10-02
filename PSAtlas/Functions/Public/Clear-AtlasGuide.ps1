@@ -1,14 +1,14 @@
-Function Start-PWSHSchoolLesson {
+﻿Function Clear-AtlasGuide {
 
     [CmdletBinding()]
     Param(
-        [switch]$StartWithISE
+        # Any other parameters can go here
     )
 
     DynamicParam {
 
         # Set the dynamic parameters' name
-        $ParameterName = 'Lesson'
+        $ParameterName = 'on'
             
         # Create the dictionary 
         $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
@@ -25,8 +25,8 @@ Function Start-PWSHSchoolLesson {
         $AttributeCollection.Add($ParameterAttribute)
 
         # Generate and set the ValidateSet 
-        #$arrSet = Get-ChildItem -Path "$Env:PsModulePath\PWSHSchool\Lessons" -Directory | Select-Object -ExpandProperty Name
-        $arrSet = Get-ChildItem -Path (Join-Path -Path (Split-path (Get-Module -name PWSHSchool).Path) -ChildPath "Lessons" ) -Directory | Select-Object -ExpandProperty Name
+        #$arrSet = Get-ChildItem -Path "$Env:PsModulePath\PWSHSchool\Guides" -Directory | Select-Object -ExpandProperty Name
+        $arrSet = Get-ChildItem -Path (Join-Path -Path (Split-path (Get-Module -name PSAtlas).Path) -ChildPath "Guides" ) -Directory | Select-Object -ExpandProperty Name
         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
 
         # Add the ValidateSet to the attributes collection
@@ -40,32 +40,24 @@ Function Start-PWSHSchoolLesson {
 
     begin {
         # Bind the parameter to a friendly variable
-        $Lesson = $PsBoundParameters[$ParameterName]
+        $Guide = $PsBoundParameters[$ParameterName]
     }
 
     process {
+        $ModulePath = Split-path (Get-Module -name PSAtlas).Path
+        $GuideFolderPath = Join-Path -Path $ModulePath -ChildPath "Guides"
+        $GuidePath = Join-Path -Path $GuideFolderPath -ChildPath $Guide
 
-        $ModulePath = Split-path (Get-Module -name PWSHSchool).Path
-        $StringPath = Join-Path -Path $ModulePath -ChildPath "Style"
-        $LessonFolderPath = Join-Path -Path $ModulePath -ChildPath "Lessons"
-        Clear-Host
-        $LessonPath = Join-Path -Path $LessonFolderPath -ChildPath $Lesson
-        $LessonJSON = Join-Path -Path $LessonPath -ChildPath "Lesson.json"
-        #$LessonFilePath = Join-Path -Path $LessonPath -ChildPath "$Lesson.ps1"
+        $StepPaths = (Get-ChildItem $GuidePath -Recurse -File | ?{$_.name -ne "Template.ps1" -and $_.name -ne "Step.json" -and $_.name -ne "Guide.json" -and $_.name -notlike "*.Tests.ps1"}).FullName
 
-        $LessonObj = [Lesson]::new($LessonJSON)
-
-        Write-Start -Lesson $Lesson
-
-        $Count = 0
-        $Stepcount = $LessonObj.Step.count
-
-        Foreach($Step in $LessonObj.Step){
-            $count++
-            Write-Step -Lesson $Lesson -Step $Step
+        foreach($step in $StepPaths){
+            $File = (Get-item $step) 
+            Remove-Item $File
         }
-
-        Write-End -Lesson $Lesson
-              
+        
+        
     }
+
+
+
 }

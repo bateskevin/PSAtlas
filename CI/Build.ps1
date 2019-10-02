@@ -52,7 +52,7 @@ if(!($IsLinux)){
     }
 
     #Updating Manifest (Module Version)
-    $manifestpath = "./PWSHSchool/"+"PWSHSchool"+".psd1"
+    $manifestpath = "./PSAtlas/"+"PsAtlas"+".psd1"
     $manifest = Test-ModuleManifest -Path $manifestPath
     [System.Version]$version = $manifest.Version
     if($env:APPVEYOR_REPO_COMMIT_MESSAGE -match '\[(Major)\]'){
@@ -63,7 +63,7 @@ if(!($IsLinux)){
         [String]$newVersion = New-Object -TypeName System.Version -ArgumentList ($version.Major, $version.Minor, ($version.build + 1))
     }
     write-host "Going to increment Version number from $Version to $NewVersion"-forgroundcolor green
-    Update-ModuleManifest -Path $manifestPath -ModuleVersion $newVersion -CmdletsToExport @('Clear-PWSHSchoolLesson','Get-PWSHSchoolLesson','New-PWSHSchoolLesson','New-PWSHSchoolStep','Start-PWSHSchoolLesson') -FunctionsToExport @('Clear-PWSHSchoolLesson','Get-PWSHSchoolLesson','New-PWSHSchoolLesson','New-PWSHSchoolStep','Start-PWSHSchoolLesson') -VariablesToExport '*'
+    Update-ModuleManifest -Path $manifestPath -ModuleVersion $newVersion -CmdletsToExport @('Clear-AtlasGuide','Get-AtlasGuide','New-AtlasGuide','New-AtlasStep','Start-AtlasGuide') -FunctionsToExport @('Clear-AtlasGuide','Get-AtlasGuide','New-AtlasGuide','New-AtlasStep','Start-AtlasGuide') -VariablesToExport '*'
     if($res.FailedCount -eq 0 -and $APPVEYOR_REPO_COMMIT_MESSAGE -match '^.*dep-psgallery$'){
         write-host "Module would now be deployed to the psgallery" -forgroundcolor green
     }else{

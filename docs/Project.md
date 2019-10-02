@@ -1,5 +1,3 @@
-![PWSHSchool](../Img/PWSHSchool.png)
-
 ## Class documentation
 
 I use two classes. I'll let [PSClassUtils](https://github.com/Stephanevg/PSClassUtils) speak for me here:
@@ -8,7 +6,7 @@ I use two classes. I'll let [PSClassUtils](https://github.com/Stephanevg/PSClass
 
 ## Design
 
-I use a combination of two JSON files to create the classes. One called lesson.json and the other step.json. 
+I use a combination of two JSON files to create the classes. One called Guide.json and the other step.json. 
 Each of these files contains the information for what the name of the file suggests.
 
 You can check out the diagram above to see what information gets configured in the json.
@@ -17,26 +15,26 @@ You can check out the diagram above to see what information gets configured in t
 
 ## Root Folder
 
-Your Rootfolder will have the name of your lesson. **Make sure it does not contain spaces or weird characters**
+Your Rootfolder will have the name of your Guide. **Make sure it does not contain spaces or weird characters**
 
-### Lesson.json 
+### Guide.json 
 
-In your root folder you will need a "Lesson.json" file. 
+In your root folder you will need a "Guide.json" file. 
 
-![LessonJSON](../Img/LessonJSON.PNG)
+![GuideJSON](../Img/GuideJSON.PNG)
 
 You will have to set the following values:
 
-1. **Name** --> This will be the name of your lesson (so choose it wisely ;))
+1. **Name** --> This will be the name of your Guide (so choose it wisely ;))
 
-2. **Level** --> This will indicate how difficult your lesson is gonna be. 
- you can choose one of the following values for the level of your lesson:
+2. **Level** --> This will indicate how difficult your Guide is gonna be. 
+ you can choose one of the following values for the level of your Guide:
   * Beginner
   * Intermediate
   * Advanced
   * Expert
  
- 3. **Prerequisites** --> If your lessons requires modules you should put its name here. PWSHSchool is then going to download it before the lesson starts. **This is for Modules on the Gallery**
+ 3. **Prerequisites** --> If your Guide requires modules you should put its name here. PSAtlas is then going to download it before the Guide starts. **This is for Modules on the Gallery**
  
  4. **Artifacts** --> If you want to load Modules that are not in the gallery you can add a Folder (the folder should have the same name as the module file it contains) to the Artifacts folder. The Artifacts Folder should be stored in the root folder. 
  
@@ -55,9 +53,9 @@ You will have to set the following values:
  
 1. **Title** --> This will be the Title of this step.
 
-2 **Description** --> This will be the task-position you leave the people who do your lesson. Make it very clear what you want them to do.
+2 **Description** --> This will be the task-position you leave the people who do your Guide. Make it very clear what you want them to do.
 
-3. **Hint** --> If you feel like it's needed, you can leave a hint to how this task could get solved. The Hints can get called by the people who do your lesson.
+3. **Hint** --> If you feel like it's needed, you can leave a hint to how this task could get solved. The Hints can get called by the people who do your Guide.
 
 ### Template.ps1
   
@@ -68,7 +66,7 @@ You will have to set the following values:
   
   Also it should be well commented, so the user knows where to change stuff and where not.
   
-  For example such a function could look like this (Example of Variable_Types lesson):
+  For example such a function could look like this (Example of Variable_Types Guide):
   
  ```
  Function Define-Datatype {
@@ -80,7 +78,7 @@ You will have to set the following values:
     return <variable>
 }
 
-# Save your code when finished and continue in the shell you started the Lesson.
+# Save your code when finished and continue in the shell you started the Guide.
  ```
  It does not have to be functional, in fact in the start it **should** fail the tests. 
  
@@ -105,9 +103,9 @@ You will have to set the following values:
 Import-Module Pester
 
 Describe "Testing Step1" {
-    it "The variable should contain 'PWSHSchool'" {
+    it "The variable should contain 'PSAtlas'" {
         $variable = Define-Datatype
-        $variable | Should BeExactly "PWSHSchool" 
+        $variable | Should BeExactly "PSAtlas" 
     }
 }
  ```

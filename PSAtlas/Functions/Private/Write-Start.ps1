@@ -2,23 +2,23 @@
 Function Write-Start {
 
     param (
-        $Lesson
+        $Guide
     )
 
-    $ModulePath = Split-path (Get-Module -name PWSHSchool).Path
+    $ModulePath = Split-path (Get-Module -name PSAtlas).Path
     $StringPath = Join-Path -Path $ModulePath -ChildPath "Style"
-    $LessonFolderPath = Join-Path -Path $ModulePath -ChildPath "Lessons"
+    $GuideFolderPath = Join-Path -Path $ModulePath -ChildPath "Guides"
     Clear-Host
-    $LessonPath = Join-Path -Path $LessonFolderPath -ChildPath $Lesson
-    $LessonJSON = Join-Path -Path $LessonPath -ChildPath "Lesson.json"
+    $GuidePath = Join-Path -Path $GuideFolderPath -ChildPath $Guide
+    $GuideJSON = Join-Path -Path $GuidePath -ChildPath "Guide.json"
 
-    $LessonObj = [Lesson]::new($LessonJSON)
+    $GuideObj = [Guide]::new($GuideJSON)
 
-    if($LessonObj.Artifacts){
-        foreach($Artifact in $LessonObj.Artifacts){
+    if($GuideObj.Artifacts){
+        foreach($Artifact in $GuideObj.Artifacts){
             try{   
                 Write-String (Join-Path -Path $StringPath -ChildPath "Prerequisites.txt" ) -type "Info"
-                $ArtifactPath = join-path -Path $LessonPath -ChildPath "Artifacts"
+                $ArtifactPath = join-path -Path $GuidePath -ChildPath "Artifacts"
                 foreach($Folder in $ArtifactPath){
                     $ModuleFile = Join-Path $ArtifactPath -ChildPath "$($Artifact)\$($Artifact).psd1"
                     Import-Module $ModuleFile -Force -Verbose
@@ -30,9 +30,9 @@ Function Write-Start {
         }
     }
 
-    if($LessonObj.Prerequisites){
+    if($GuideObj.Prerequisites){
         Clear-Host
-        foreach($Prereq in $LessonObj.Prerequisites){
+        foreach($Prereq in $GuideObj.Prerequisites){
             try{
                 Write-String (Join-Path -Path $StringPath -ChildPath "PrereqOnline.txt" ) -type "Info"
                 find-Module $Prereq | Install-Module -Verbose 

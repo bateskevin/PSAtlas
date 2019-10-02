@@ -2,41 +2,41 @@
 Function Write-Step {
 
     param (
-        $Lesson,
+        $Guide,
         $Step
-    )
+    ) 
 
-    $ModulePath = Split-path (Get-Module -name PWSHSchool).Path
+    $ModulePath = Split-path (Get-Module -name PSAtlas).Path
     $StringPath = Join-Path -Path $ModulePath -ChildPath "Style"
-    $LessonFolderPath = Join-Path -Path $ModulePath -ChildPath "Lessons"
+    $GuideFolderPath = Join-Path -Path $ModulePath -ChildPath "Guides"
     Clear-Host
-    $LessonPath = Join-Path -Path $LessonFolderPath -ChildPath $Lesson
-    $LessonJSON = Join-Path -Path $LessonPath -ChildPath "Lesson.json"
+    $GuidePath = Join-Path -Path $GuideFolderPath -ChildPath $Guide
+    $GuideJSON = Join-Path -Path $GuidePath -ChildPath "Guide.json"
 
-    $LessonObj = [Lesson]::new($LessonJSON)
+    $GuideObj = [Guide]::new($GuideJSON)
 
-    $LessonFinished = $false
+    $GuideFinished = $false
             $next = ""
             $StepPath = Split-Path $Step.Path
-            $LessonFilePath = Join-Path -Path $StepPath -ChildPath "$($Step.Title).ps1"
+            $GuideFilePath = Join-Path -Path $StepPath -ChildPath "$($Step.Title).ps1"
 
-            if(Test-Path $LessonFilePath){
+            if(Test-Path $GuideFilePath){
                 while($already -ne "Y" -and $already -ne "N"){
                     Write-String (Join-Path -Path $StringPath -ChildPath "LandingPage.txt" ) -type "Info"
-                    $already = Read-Host "You already started this lesson, do you whish to continue? (Y/N) - Carefull, by selecting no you will loose your progress!"
+                    $already = Read-Host "You already started this Guide, do you whish to continue? (Y/N) - Carefull, by selecting no you will loose your progress!"
                     Clear-Host
                     if($already -eq "Y"){
                         if($StartWithISE){
-                            ise -file $LessonFilePath
+                            ise -file $GuideFilePath
                         }else{
-                            code $LessonFilePath
+                            code $GuideFilePath
                         } 
                     }elseif($already -eq "N"){
-                        Remove-Item $LessonFilePath
-                        $null = New-Item -ItemType File -Path $LessonFilePath
+                        Remove-Item $GuideFilePath
+                        $null = New-Item -ItemType File -Path $GuideFilePath
                         if(Test-Path $Step.Template){
                             $Templatecontent = Get-Content $Step.Template
-                            $Templatecontent | out-file -FilePath $LessonFilePath -Append
+                            $Templatecontent | out-file -FilePath $GuideFilePath -Append
                         }
                     }else{
                         Clear-Host
@@ -46,19 +46,19 @@ Function Write-Step {
                 $already = ""
             }else{
                 
-                $null = New-Item -ItemType File -Path $LessonFilePath
+                $null = New-Item -ItemType File -Path $GuideFilePath
                 if(Test-Path $Step.Template){
                     $Templatecontent = Get-Content $Step.Template
-                    $Templatecontent | out-file -FilePath $LessonFilePath -Append
+                    $Templatecontent | out-file -FilePath $GuideFilePath -Append
                 }
             }
             if($StartWithISE){
-                ise -file $LessonFilePath
+                ise -file $GuideFilePath
             }else{
-                code $LessonFilePath
+                code $GuideFilePath
             }
-                $LessonFinished = $false 
-            while(!($LessonFinished )){
+                $GuideFinished = $false 
+            while(!($GuideFinished )){
             
             if($next -eq "Test"){
                     $TestResult = Invoke-Pester $Step.Test -PassThru
@@ -66,7 +66,7 @@ Function Write-Step {
 
                     if($TestResult.TestResult.Passed){
                         Clear-Host
-                        $LessonFinished = $true
+                        $GuideFinished = $true
                     }else{
 
                         Clear-Host
@@ -121,11 +121,11 @@ $($Step.Description)
             }                
 
                 if($next -eq "Skip"){
-                    $LessonFinished = $true
+                    $GuideFinished = $true
                 }
 
-            if(!($LessonFinished)){
-                $next = Read-Host "[$($LessonObj.Name)][$($Step.Title)]"
+            if(!($GuideFinished)){
+                $next = Read-Host "[$($GuideObj.Name)][$($Step.Title)]"
             }
 
             }

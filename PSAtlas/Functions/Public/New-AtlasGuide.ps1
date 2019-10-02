@@ -1,31 +1,31 @@
-function New-PWSHSchoolLesson {
+function New-AtlasGuide {
     param(
         [String]$Path = (Get-Location),
-        [string]$Name,
+        [string]$on,
         [string]$Level,
         [string[]]$Prerequisites,
         [string[]]$Artifacts
     )
 
-    $LessonHash = @{}
-    $LessonHash.Name = $Name
-    $LessonHash.Level = $Level
-    $LessonHash.Prerequisites = $Prerequisites
+    $GuideHash = @{}
+    $GuideHash.Name = $Name
+    $GuideHash.Level = $Level
+    $GuideHash.Prerequisites = $Prerequisites
 
     $ArtifactNames = @()
     foreach($Artifact in $Artifacts){
         $ArtifactName = (Get-Item $Artifact).Name
         $ArtifactNames += $ArtifactName
     }
-    $LessonHash.Artifacts = $ArtifactNames
+    $GuideHash.Artifacts = $ArtifactNames
 
-    $LessonObj = New-Object psobject -Property $LessonHash
+    $GuideObj = New-Object psobject -Property $GuideHash
 
-    $JSON = $LessonObj | ConvertTo-Json
+    $JSON = $GuideObj | ConvertTo-Json
 
     $FolderPath = Join-Path -Path $Path -ChildPath $Name
     $ArtifactsPath = Join-Path -Path $FolderPath -ChildPath "Artifacts"
-    $JSONPath = Join-Path -Path $FolderPath -ChildPath "Lesson.json"
+    $JSONPath = Join-Path -Path $FolderPath -ChildPath "Guide.json"
     $null = New-Item -Path $FolderPath -ItemType Directory
     $null = New-Item -Path $ArtifactsPath -ItemType Directory
     foreach($Artifact in $Artifacts){

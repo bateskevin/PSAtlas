@@ -5,22 +5,22 @@ Enum Level {
     Expert
 }
 
-Class Lesson {
+Class Guide {
     [String]$Name
     [Level]$Level
     [String[]]$Prerequisites
     [String[]]$Artifacts
     [Step[]]$Step
 
-    Lesson($LessonCFG){
-        $JSON = (Get-Content $LessonCFG -ErrorAction Stop) -join "`n" | ConvertFrom-Json -ErrorAction Stop
+    Guide($GuideCFG){
+        $JSON = (Get-Content $GuideCFG -ErrorAction Stop) -join "`n" | ConvertFrom-Json -ErrorAction Stop
 
         $This.Name = $JSON.Name
         $This.Level = $JSON.Level
         $This.Prerequisites = $JSON.Prerequisites
         $This.Artifacts = $JSON.Artifacts
 
-        $StepPath = (split-path $LessonCFG)
+        $StepPath = (split-path $GuideCFG)
         $Steps = Get-ChildItem $StepPath -Directory | ?{$_.Name -ne "Artifacts"} 
 
         foreach($Step in $Steps.FullName){

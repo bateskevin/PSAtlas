@@ -1,14 +1,14 @@
-﻿Function Clear-PWSHSchoolLesson {
+Function Start-AtlasGuide {
 
     [CmdletBinding()]
     Param(
-        # Any other parameters can go here
+        [switch]$StartWithISE
     )
 
     DynamicParam {
 
         # Set the dynamic parameters' name
-        $ParameterName = 'Lesson'
+        $ParameterName = 'on'
             
         # Create the dictionary 
         $RuntimeParameterDictionary = New-Object System.Management.Automation.RuntimeDefinedParameterDictionary
@@ -25,8 +25,8 @@
         $AttributeCollection.Add($ParameterAttribute)
 
         # Generate and set the ValidateSet 
-        #$arrSet = Get-ChildItem -Path "$Env:PsModulePath\PWSHSchool\Lessons" -Directory | Select-Object -ExpandProperty Name
-        $arrSet = Get-ChildItem -Path (Join-Path -Path (Split-path (Get-Module -name PWSHSchool).Path) -ChildPath "Lessons" ) -Directory | Select-Object -ExpandProperty Name
+        #$arrSet = Get-ChildItem -Path "$Env:PsModulePath\PWSHSchool\Guides" -Directory | Select-Object -ExpandProperty Name
+        $arrSet = Get-ChildItem -Path (Join-Path -Path (Split-path (Get-Module -name PSAtlas).Path) -ChildPath "Guides" ) -Directory | Select-Object -ExpandProperty Name
         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($arrSet)
 
         # Add the ValidateSet to the attributes collection
@@ -40,24 +40,32 @@
 
     begin {
         # Bind the parameter to a friendly variable
-        $Lesson = $PsBoundParameters[$ParameterName]
+        $Guide = $PsBoundParameters[$ParameterName]
     }
 
     process {
-        $ModulePath = Split-path (Get-Module -name PWSHSchool).Path
-        $LessonFolderPath = Join-Path -Path $ModulePath -ChildPath "Lessons"
-        $LessonPath = Join-Path -Path $LessonFolderPath -ChildPath $Lesson
 
-        $StepPaths = (Get-ChildItem $LessonPath -Recurse -File | ?{$_.name -ne "Template.ps1" -and $_.name -ne "Step.json" -and $_.name -ne "Lesson.json" -and $_.name -notlike "*.Tests.ps1"}).FullName
+        $ModulePath = Split-path (Get-Module -name PSAtlas).Path
+        $StringPath = Join-Path -Path $ModulePath -ChildPath "Style"
+        $GuideFolderPath = Join-Path -Path $ModulePath -ChildPath "Guides"
+        Clear-Host
+        $GuidePath = Join-Path -Path $GuideFolderPath -ChildPath $Guide
+        $GuideJSON = Join-Path -Path $GuidePath -ChildPath "Guide.json"
+        #$GuideFilePath = Join-Path -Path $GuidePath -ChildPath "$Guide.ps1"
 
-        foreach($step in $StepPaths){
-            $File = (Get-item $step) 
-            Remove-Item $File
+        $GuideObj = [Guide]::new($GuideJSON)
+
+        Write-Start -Guide $Guide
+
+        $Count = 0
+        $Stepcount = $GuideObj.Step.count
+
+        Foreach($Step in $GuideObj.Step){
+            $count++
+            Write-Step -Guide $Guide -Step $Step
         }
-        
-        
+
+        Write-End -Guide $Guide
+              
     }
-
-
-
 }

@@ -1,38 +1,36 @@
-![PWSHSchool](../Img/PWSHSchool.png)
-
-# Submit lessons to PWSHSchool
+# Submit Guides to PSAtlas
 
 First of all, since you're here thanks for considering contributing to this project! 
 Please be sure to also check out the [Contribution Guide](CONTRIBUTING.md), since I also recommend 
-you stick to it while contributing lessons.
+you stick to it while contributing Guides.
 
-## How lessons are built up
+## How Guides are built up
 
 Basically you have a topic you want to showcase. A module of yours for example.
 
 Go ahead and think about how you could divide that topic up into different steps for somebody to learn it.
 
-I also highly recommend you check out the [documentation on using the module](Students.md). Like this you will see what people are gonna face with your lessons. 
+I also highly recommend you check out the [documentation on using the module](Students.md). Like this you will see what people are gonna face with your Guides. 
 
-Also also, Check out my (very basic) [lesson on Powershell datatypes](https://github.com/bateskevin/PWSHSchool/tree/master/Lessons/Variable_Datatypes). This could serve you as a template for your first lesson.
+Also also, Check out my (very basic) [Guide on Powershell datatypes](https://github.com/bateskevin/PSAtlas/tree/master/Guides/Variable_Datatypes). This could serve you as a template for your first Guide.
 
 ## Speaking of steps
 
 Speaking of steps, cause that's exactly how you gonna do it. There is a basic folder structure to follow 
-while creating a PWSHSchool lesson. Let me show it to you.
+while creating a PSAtlas Guide. Let me show it to you.
 
-# How to build your lesson
+# How to build your Guide
 
-PWSHSchool provides you with a set of cmdlets to create lessons. 
+PSAtlas provides you with a set of cmdlets to create Guides. 
 
-Creating a lesson contains two steps.
+Creating a Guide contains two steps.
 
-## Create a lesson
+## Create a Guide
 
-You can create a lesson with the following command:
+You can create a Guide with the following command:
 
 ```
-New-PWSHSchoolLesson
+New-AtlasGuide
 ```
 
 it does require a few inputs in order for it to work.
@@ -40,20 +38,20 @@ it does require a few inputs in order for it to work.
 Example:
 
 ```
-New-PWSHSchoolLesson -Name "YourLessonName" -Level "Beginner" -Prerequisites "YourModuleOne","YourModuleTwo" -Artifacts "PathToYourModuleThree","PathToYourModuleFour"
+New-AtlasGuide -on "YourGuideTopic" -Level "Beginner" -Prerequisites "YourModuleOne","YourModuleTwo" -Artifacts "PathToYourModuleThree","PathToYourModuleFour"
 ```
 
 ### Parameter
 
 #### Path
 
-The Path parameter will be the location where your lesson will be saved. Note that the Name parameter (below) will be the name of the folder and the Path parameter really is only the path to your lesson folder. 
+The Path parameter will be the location where your Guide will be saved. Note that the Name parameter (below) will be the name of the folder and the Path parameter really is only the path to your Guide folder. 
 
-You can also ignore it and your lesson will be created at the current location of your shell.
+You can also ignore it and your Guide will be created at the current location of your shell.
 
-#### Name 
+#### on 
 
-The Name parameter will be the name of the folder containing your lesson. Also it will be Name of your lesson in PWSHSchool.
+The on parameter will be the name of the folder containing your Guide. Also it will be Name of your Guide in PSAtlas.
 
 #### Level
 
@@ -64,7 +62,7 @@ You can set one of 4 values here
 * Advanced
 * Expert
 
-Set the level according to how hard your lesson is gonna be to solve.
+Set the level according to how hard your Guide is gonna be to solve.
 
 #### Prerequisites
 
@@ -72,14 +70,14 @@ Here you can pass your prerequisites. So if you want to have the module(s) loade
 
 #### Artifacts
 
-If your module is not deployed to the gallery you can add it via the artifacts parameter. Just pass the path(s) to your modules here and they will be included in the lesson.
+If your module is not deployed to the gallery you can add it via the artifacts parameter. Just pass the path(s) to your modules here and they will be included in the Guide.
 
 ## Create a Step
 
-Once you have created a lesson you can go ahead and create multiple steps for your lesson. 
+Once you have created a Guide you can go ahead and create multiple steps for your Guide. 
 
 ```
-New-PWSHSchoolStep
+New-AtlasStep
 ```
 
 it does require a few inputs in order for it to work.
@@ -87,7 +85,7 @@ it does require a few inputs in order for it to work.
 Example:
 
 ```
-New-PWSHSchoolStep -Lesson "PathToYourLesson" -Title "Title of your Step" -Description "Here you fill in what the Task for this step is" -Hint "Add a hint here if needed" -Template "PathToYourTemplate\Template.ps1" -Test "PathToYourTest\Test.Tests.ps1"
+New-PSAtlasStep -Guide "PathToYourGuide" -Title "Title of your Step" -Description "Here you fill in what the Task for this step is" -Hint "Add a hint here if needed" -Template "PathToYourTemplate\Template.ps1" -Test "PathToYourTest\Test.Tests.ps1"
 ```
 
 ### Template
@@ -106,7 +104,7 @@ For example:
     return <variable>
 }
 
-# Save your code when finished and continue in the shell you started the Lesson.
+# Save your code when finished and continue in the shell you started the Guide.
  ```
  
  ### Test
@@ -124,9 +122,9 @@ For example:
 Import-Module Pester
 
 Describe "Testing Step1" {
-    it "The variable should contain 'PWSHSchool'" {
+    it "The variable should contain 'PSAtlas'" {
         $variable = Define-Datatype
-        $variable | Should BeExactly "PWSHSchool" 
+        $variable | Should BeExactly "PSAtlas" 
     }
 }
  ```
@@ -145,9 +143,9 @@ Import-Module Pester
 
 ### Parameter 
 
-#### Lesson
+#### Guide
 
-Pass the path to the lesson you made.
+Pass the path to the Guide you made.
 
 #### Title
 
@@ -171,12 +169,12 @@ Pass the path to the Test you created to test the code that the user edits.
 
 # How do I add it to the module?
 
-Once you have a fully finished lesson. Clone this module and save it in the "PWHSSchool\Lessons" directory. Then import the Module and you can try out your lesson with the following code:
+Once you have a fully finished Guide. Clone this module and save it in the "PWHSSchool\Guides" directory. Then import the Module and you can try out your Guide with the following code:
 
 ```
-Start-PWSHSchoolLesson -Lesson <Your_Lesson_Name>
+Start-PSAtlasGuide -Guide <Your_Guide_Name>
 ```
-It will automatically be available for autocompletion, so no need for "Your_Lesson_Name".
+It will automatically be available for autocompletion, so no need for "Your_Guide_Name".
 
 ## Test it
 

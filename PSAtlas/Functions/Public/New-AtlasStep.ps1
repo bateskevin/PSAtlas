@@ -1,6 +1,6 @@
-function New-PWSHSchoolStep {
+function New-AtlasStep {
     param(
-        [String]$Lesson,
+        [String]$Guide,
         [string]$Title,
         [string]$Description,
         [string]$Hint,
@@ -17,11 +17,11 @@ function New-PWSHSchoolStep {
     
     $JSON = $StepObj | ConvertTo-Json
 
-    $CheckPath = Join-Path -Path $Lesson -ChildPath "Step1"
+    $CheckPath = Join-Path -Path $Guide -ChildPath "Step1"
     if(!(Test-Path $CheckPath)){
-        $FolderPath = Join-Path -Path $Lesson -ChildPath "Step1"
+        $FolderPath = Join-Path -Path $Guide -ChildPath "Step1"
     }else{
-        $Steps = Get-ChildItem $Lesson -Directory | ?{$_.Name -ne "Artifacts"}
+        $Steps = Get-ChildItem $Guide -Directory | ?{$_.Name -ne "Artifacts"}
         $Numbers = @()
         foreach($Step in $Steps.name){
             $Number = $Step.Substring($Step.Length - 1)
@@ -30,7 +30,7 @@ function New-PWSHSchoolStep {
         }
 
         [String]$Number = (($Numbers | sort -Descending | select -First 1) + 1)
-        $FolderPath = Join-Path -Path $Lesson -ChildPath "Step$($Number)"
+        $FolderPath = Join-Path -Path $Guide -ChildPath "Step$($Number)"
     }
 
     $TestsPath = Join-Path -Path $FolderPath -ChildPath "Tests"

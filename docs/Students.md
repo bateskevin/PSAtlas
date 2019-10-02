@@ -1,73 +1,71 @@
-![PWSHSchool](../Img/PWSHSchool.png)
+# Take Guides
 
-# Take Lessons
+Hey, in this document you will learn how to use PSAtlas as a Student. 
 
-Hey, in this document you will learn how to use PWSHSchool as a Student. 
-
-First of all let's look at what steps are needed for you to be able to use PWSHSchool.
+First of all let's look at what steps are needed for you to be able to use PSAtlas.
 
 ## Prerequisites
 
 ### Install the Module
 
 ```
-Find-Module -Name PWSHSchool | Install-Module
+Find-Module -Name PSAtlas | Install-Module
 Find-Module -Name Pester | Install-Module
-Import-Module PWSHSchool
+Import-Module PSAtlas
 ```
 
 Note that you do need the Pester Module (Powershell testing framework) in order to use this Module
-There is however no need for you to import it every time. PWSHSchool does that for you.
+There is however no need for you to import it every time. PSAtlas does that for you.
 
-## Find the lessons suited best for you
+## Find the Guides suited best for you
 
 Once you completed the prerequisites you'll have installed the module and importet it.
 
 It is now ready to use! So let's take advantage of that.
 
-### Find Lessons
+### Find Guides
 
-to search for lessons you can use the following code.
-
-```
-Get-PWSHSchoolLesson
-```
-
-This will list you all the Lessons that are available in your version. It will look something like this:
-```
-Name              Level Step
-----              ----- ----
-Variable_Types Beginner {Step, Step}
-```
-
-If you know a lesson by name you can add the name parameter to your function:
+to search for Guides you can use the following code.
 
 ```
-Get-PWSHSchoolLesson -Name "Variable_Types"
+Get-PSAtlasGuide
 ```
 
-In this case it will return the same output (since there is one lesson available so far:) this will get updated as soon as more lessons are available) The output will look like this:
+This will list you all the Guides that are available in your version. It will look something like this:
 ```
 Name              Level Step
 ----              ----- ----
 Variable_Types Beginner {Step, Step}
 ```
 
-## Start a lesson
+If you know a Guide by name you can add the name parameter to your function:
 
-Important: The powershell console you start your lesson from should have administrative privileges.
-
-Once you found a lesson you can start a lesson with the following code:
 ```
-Start-PWSHSchoolLesson -Lesson Variable_Datatypes
+Get-PSAtlasGuide -on "Variable_Types"
+```
+
+In this case it will return the same output (since there is one Guide available so far:) this will get updated as soon as more Guides are available) The output will look like this:
+```
+Name              Level Step
+----              ----- ----
+Variable_Types Beginner {Step, Step}
+```
+
+## Start a Guide
+
+Important: The powershell console you start your Guide from should have administrative privileges.
+
+Once you found a Guide you can start a Guide with the following code:
+```
+Start-PSAtlasGuide -on Variable_Datatypes
 ```
 ### Autocompletion
-All lessons available support autocompletion. You can therefore also use that to browse for keywords.
+All Guides available support autocompletion. You can therefore also use that to browse for keywords.
 
-## How lessons work
+## How Guides work
 
 ### Console --> Interface
-Ok you started your Lesson. Now the console you started in will become your Interface. This will look like this:
+Ok you started your Guide. Now the console you started in will become your Interface. This will look like this:
 
 ![Console](../Img/Console.PNG)
 
@@ -77,13 +75,13 @@ get displayed what you can enter in the console.
 ### Editor --> VSCode
 Next to the console getting your interface, VSCode will start up and load your first task.
 
-optionally you can start PWSHSchool with Powershell ISE if you like. Just add the "StartWithISE" parameter to your call.
+optionally you can start PSAtlas with Powershell ISE if you like. Just add the "StartWithISE" parameter to your call.
 
 ```
-Start-PWSHSchoolLesson -Lesson Variable_Datatypes -StartWithISE
+Start-PSAtlasGuide -on Variable_Datatypes -StartWithISE
 ```
 
-As an example. The first task from the Variable_Types Lesson will look like this in VSCode:
+As an example. The first task from the Variable_Types Guide will look like this in VSCode:
 
 ![ISETask](../Img/CodeTask.PNG)
 
@@ -108,7 +106,7 @@ If your code passes the tests you will automatically move on to the next task.
 
 ## Skip a task
 
-You can also skip a task if you are not interessted or can't handle it at that time (or god forbid even a bug appears)
+You can also skip a task if you are not interessted or can't handle it at that time (or god forbid even a bug appears).
 Your progress will be saved (by you in the ISE) and the next time you get to that task you will be asked if you want to continue.
 
 To skip the task, simply type "skip" in the console and hit enter.
@@ -119,15 +117,15 @@ If you want to exit, simply hit ctrl+c and you'll be in your shell just as befor
 
 As long as you save your code in the ISE, you will be able to pick up right where you left.
 
-## Clear the lesson
+## Clear the Guide
 
-You feel like you need a new start to a specific lesson? Exit the lesson and use the following 
+You feel like you need a new start to a specific Guide? Exit the Guide and use the following 
 code to clear it up and you'll be able to have a new start:
 
 ```
-Clear-PWSHSchoolLesson -Lesson Variable_Datatypes
+Clear-AtlasGuide -on Variable_Datatypes
 ```
 
 ## That's it
 
-That's it folks! You can now use PWSHSchool! Have fun learning!
+That's it folks! You can now use PSAtlas! Have fun learning!
