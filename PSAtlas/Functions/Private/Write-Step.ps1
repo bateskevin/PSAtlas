@@ -22,7 +22,7 @@ Function Write-Step {
 
             if(Test-Path $GuideFilePath){
                 while($already -ne "Y" -and $already -ne "N"){
-                    Write-String (Join-Path -Path $StringPath -ChildPath "LandingPage.txt" ) -type "Info"
+                    Write-String (Join-Path -Path $StringPath -ChildPath "Writing.txt" ) -type "Info"
                     $already = Read-Host "You already started this Guide, do you whish to continue? (Y/N) - Carefull, by selecting no you will loose your progress!"
                     Clear-Host
                     if($already -eq "Y"){
@@ -70,7 +70,8 @@ Function Write-Step {
                     }else{
 
                         Clear-Host
-                        Write-String (Join-Path -Path $StringPath -ChildPath "LandingPage.txt" ) -type "Info"   
+                        Write-String (Join-Path -Path $StringPath -ChildPath "Writing.txt" ) -type "Info"
+                        Write-String (Join-Path -Path $StringPath -ChildPath "Help.txt" ) -type "Info"  
                         write-host @"
 You are currently on Step $Count of $StepCount
 
@@ -109,7 +110,8 @@ $($Step.Description)
                     }
                 }else{
                     Clear-Host
-                    Write-String (Join-Path -Path $StringPath -ChildPath "LandingPage.txt" ) -type "Info"
+                    Write-String (Join-Path -Path $StringPath -ChildPath "Writing.txt" ) -type "Info"
+                    Write-String (Join-Path -Path $StringPath -ChildPath "Help.txt" ) -type "Info" 
                     Write-Host @"
 You are currently on Step $Count of $StepCount
 

@@ -1,8 +1,4 @@
-     ____ _  __ ______ _   __  ___
-    /  __/_|/  \_   __| | /  \|  _|
-   /  / \ \/ __ \|  |   |/_ _ \  \
-  /__/ /___|/  \_\__|______| \_\__|
-  
+
 Congratulations! you finished the Lesson!
                     
 Thank you for using PWSHSchool. If you are interessted why not start the next lesson? ;)

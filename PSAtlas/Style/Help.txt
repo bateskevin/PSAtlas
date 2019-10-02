@@ -1,0 +1,12 @@
+S~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~S
+S    Commands:                                    S
+S                                                 S
+S   Test : Test your solution by typing test.     S
+S   Hint : See if there is a hint available if    S
+S          you don't understand the task.         S
+S   Skip : Skip this lesson and move on to the    S 
+S          next one                               S
+S                                                 S
+S   Hit ctrl+c to quit                            S
+S~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~S
+
