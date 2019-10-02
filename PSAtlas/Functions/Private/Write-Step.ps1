@@ -61,7 +61,7 @@ Function Write-Step {
             while(!($GuideFinished )){
             
             if($next -eq "Test"){
-                    $TestResult = Invoke-Pester $Step.Test -PassThru
+                    $TestResult = Invoke-Pester $Step.Test -PassThru -Quiet
                     #$next = ""
 
                     if($TestResult.TestResult.Passed){
