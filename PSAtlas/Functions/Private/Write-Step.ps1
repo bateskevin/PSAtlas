@@ -61,7 +61,7 @@ Function Write-Step {
             while(!($GuideFinished )){
             
             if($next -eq "Test"){
-                    $TestResult = Invoke-Pester $Step.Test -PassThru -Quiet
+                    $TestResult = Invoke-Pester $Step.Test -PassThru -Show None
                     #$next = ""
 
                     if($TestResult.TestResult.Passed){
@@ -70,7 +70,7 @@ Function Write-Step {
                     }else{
 
                         Clear-Host
-                        Write-String (Join-Path -Path $StringPath -ChildPath "LandingPage.txt" ) -type "Info"    
+                        Write-String (Join-Path -Path $StringPath -ChildPath "LandingPage.txt" ) -type "Info"   
                         write-host @"
 You are currently on Step $Count of $StepCount
 
@@ -117,7 +117,7 @@ $($Step.Title)
 
 $($Step.Description)
 
-"@ -ForegroundColor Gray
+"@ -ForegroundColor Gray 
             }                
 
                 if($next -eq "Skip"){
